@@ -28,9 +28,9 @@ namespace NeuralNetwork
 
         public double FeedForward(List<double> inputs)
         {
-            for(int i = 0; i < inputs.Count; i++)
+            for(int i = 0; i < inputs.Count - 1; i++)
             {
-                if (double.TryParse(inputs[i - 1].ToString(), out  double result) == false)
+                if (double.TryParse(inputs[i].ToString(), out  double result) == false)
                 {
                     throw new ArgumentException("Signal does not match the type", inputs[i].ToString());
                 }
@@ -41,7 +41,15 @@ namespace NeuralNetwork
                 sum += inputs[i] * Weights[i];
             }
 
-            Output = Sigmoid(sum);
+            if(Signal != NeuronSignal.Input)
+            {
+                Output = Sigmoid(sum);
+            }
+            else
+            {
+                Output = sum;
+            }
+            
             return Output;
         }
 
@@ -53,7 +61,7 @@ namespace NeuralNetwork
         public void SetWeight(params double[] weights)
         {
             // TODO: Remove after adding neural network training capability.
-            for (int i = 0; i < weights.Length; i++)
+            for (int i = 0; i < weights.Length - 1; i++)
             {
                 Weights[i] = weights[i];
             }

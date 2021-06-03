@@ -11,9 +11,9 @@ namespace NeuralNetwork
         {
             var testNS = new NeuronSignal();
             var testNeuron = new Neuron(0, testNS);
-            for(int i = 0; i < neurons.Count; i++)
+            for(int i = 0; i < neurons.Count - 1; i++)
             {
-                if (neurons[i - 1].GetType() != testNeuron.GetType())
+                if (neurons[i].GetType() != testNeuron.GetType())
                 {
                     throw new ArgumentException("Neuron does not match the type", neurons[i - 1].GetType().Name);
                 }
