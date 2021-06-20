@@ -57,9 +57,13 @@
   </Choose>
   <ItemGroup>
     <Compile Include="NeuralNetworkTests.cs" />
+    <Compile Include="PictureConverterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="heart.csv">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

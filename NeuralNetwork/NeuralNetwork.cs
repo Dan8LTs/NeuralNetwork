@@ -18,7 +18,7 @@ namespace NeuralNetwork
             CreateOutputLayer();
         }
 
-        public Neuron FeedForward(params double[] inputSignals)
+        public Neuron Predict(params double[] inputSignals)
         {
             SendSignalsToInputNeurons(inputSignals);
             FeedForwardLayers();
@@ -135,7 +135,7 @@ namespace NeuralNetwork
         }
         private double Backpropagation(double expectedResult, params double[] inputs)
         {
-            var actualResult = FeedForward(inputs).Output;
+            var actualResult = Predict(inputs).Output;
             var difference = actualResult - expectedResult;
 
             foreach (var neuron in Layers.Last().Neurons)
