@@ -32,7 +32,7 @@ namespace NeuralNetwork
             var result = 0.299 * pixel.R + 0.587 * pixel.G + 0.114 * pixel.B;
             return result < Bondary ? 0 : 1;
         }
-        public void Save(string path, List<int> pixels) 
+        public void Save(string path, List<int> pixels)
         {
             var image = new Bitmap(Width, Height);
             for (int y = 0; y < image.Height; y++)

@@ -12,14 +12,6 @@ namespace NeuralNetwork
         public double Delta { get; private set; }
         public Neuron(int inputCount, NeuronSignal signal = NeuronSignal.Normal)
         {
-            //if (int.TryParse(inputCount.ToString(), out int input) == false)
-            //{
-            //    throw new ArgumentException("InputCount does not match the type", inputCount.ToString());
-            //}
-            //if (NeuronSignal.TryParse(signal.ToString(), out NeuronSignal neuronSignal) == false)
-            //{
-            //    throw new ArgumentException("Signal does not match the type", signal.GetType().Name);
-            //}
             Signal = signal;
             Weights = new List<double>();
             Inputs = new List<double>();
@@ -51,14 +43,6 @@ namespace NeuralNetwork
                 Inputs[i] = inputs[i];
             }
 
-            //for (int i = 0; i < inputs.Count - 1; i++)
-            //{
-            //    if (double.TryParse(inputs[i].ToString(), out double result) == false)
-            //    {
-            //        throw new ArgumentException("Signal does not match the type", inputs[i].ToString());
-            //    }
-            //}
-
             var sum = 0.0;
             for (int i = 0; i < inputs.Count; i++)
             {
@@ -79,15 +63,13 @@ namespace NeuralNetwork
 
         private double Sigmoid(double x)
         {
-            var result = 1.0 / (1.0 + Math.Exp(-x));
-            return result;
+            return 1.0 / (1.0 + Math.Exp(-x));
         }
 
         private double SigmoidX(double x)
         {
             var sigmoid = Sigmoid(x);
-            var result = sigmoid / (1 - sigmoid);
-            return result;
+            return sigmoid / (1 - sigmoid);
         }
 
         public void Balancing(double error, double learningRate)

@@ -13,7 +13,7 @@ namespace MedicalSystem
         {
             InitializeComponent();
             var propInfo = typeof(Patient).GetProperties();
-            for(int i = 0; i < propInfo.Length; i++)
+            for (int i = 0; i < propInfo.Length; i++)
             {
                 var property = propInfo[i];
                 var textBox = CreateTextBox(i, property);
@@ -24,11 +24,11 @@ namespace MedicalSystem
         public bool? ShowForm()
         {
             var form = new EnterData();
-            if(form.ShowDialog() == DialogResult.OK)
+            if (form.ShowDialog() == DialogResult.OK)
             {
                 var patient = new Patient();
 
-                foreach(var textBox in form.Inputs)
+                foreach (var textBox in form.Inputs)
                 {
                     patient.GetType().InvokeMember(textBox.Tag.ToString(), BindingFlags.Instance | BindingFlags.Public | BindingFlags.SetProperty, Type.DefaultBinder, patient, new object[] { textBox.Text });
                 }
@@ -37,17 +37,12 @@ namespace MedicalSystem
             }
             return null;
         }
-
-        private void EnterData_Load(object sender, EventArgs e)
-        {
-
-        }
         private TextBox CreateTextBox(int number, PropertyInfo property)
         {
             var y = number * 25 + 12;
             var textbox = new TextBox
             {
-                Anchor = (AnchorStyles)(AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right),
+                Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right),
                 Location = new System.Drawing.Point(12, y),
                 Name = "textBox" + number,
                 Size = new Size(454, 23),
@@ -56,7 +51,7 @@ namespace MedicalSystem
                 Tag = property.Name,
                 Font = new Font("Verdana", 9F, FontStyle.Italic, GraphicsUnit.Point),
                 ForeColor = Color.Gray
-        };
+            };
             textbox.GotFocus += Textbox_GotFocus;
             textbox.LostFocus += Textbox_LostFocus;
 
@@ -66,7 +61,7 @@ namespace MedicalSystem
         private void Textbox_LostFocus(object sender, EventArgs e)
         {
             var textbox = sender as TextBox;
-            
+
             if (textbox.Text == "")
             {
                 textbox.Text = textbox.Tag.ToString();
@@ -78,7 +73,7 @@ namespace MedicalSystem
         private void Textbox_GotFocus(object sender, EventArgs e)
         {
             var textbox = sender as TextBox;
-           
+
             if (textbox.Text == textbox.Tag.ToString())
             {
                 textbox.Text = "";
@@ -87,7 +82,7 @@ namespace MedicalSystem
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void predictButton_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
