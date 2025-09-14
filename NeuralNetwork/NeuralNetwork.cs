@@ -8,6 +8,12 @@ namespace NeuralNetwork
     {
         public Topology Topology { get; }
         public List<Layer> Layers { get; }
+
+        private double[] inputMeans;
+        private double[] inputStds;
+
+        private static readonly Random Rnd = new Random();
+
         public NeuralNetwork(Topology topology)
         {
             Topology = topology;
@@ -19,6 +25,32 @@ namespace NeuralNetwork
         }
 
         public Neuron Predict(params double[] inputSignals)
+        {
+            if (inputMeans != null && inputStds != null && inputSignals != null && inputSignals.Length == inputMeans.Length)
+            {
+                var scaled = new double[inputSignals.Length];
+                for (int i = 0; i < inputSignals.Length; i++)
+                {
+                    var mean = inputMeans[i];
+                    var std = inputStds[i];
+                    if (Math.Abs(std) < Double.Epsilon)
+                    {
+                        scaled[i] = 0.0;
+                    }
+                    else
+                    {
+                        scaled[i] = (inputSignals[i] - mean) / std;
+                    }
+                }
+                return PredictInternal(scaled);
+            }
+            else
+            {
+                return PredictInternal(inputSignals);
+            }
+        }
+
+        private Neuron PredictInternal(params double[] inputSignals)
         {
             SendSignalsToInputNeurons(inputSignals);
             FeedForwardLayers();
@@ -32,7 +64,7 @@ namespace NeuralNetwork
             }
         }
 
-        public void FeedForwardLayers(params double[] inputSignals)
+        private void FeedForwardLayers()
         {
             for (int i = 1; i < Layers.Count; i++)
             {
@@ -55,21 +87,78 @@ namespace NeuralNetwork
             }
         }
 
-
         public double Learn(double[] expected, double[,] inputs, int epoch)
         {
-            var error = 0.0;
-            for (int i = 0; i < epoch; i++)
+            var rowCount = inputs.GetLength(0);
+            var colCount = inputs.GetLength(1);
+
+            inputMeans = new double[colCount];
+            inputStds = new double[colCount];
+            for (int c = 0; c < colCount; c++)
             {
-                for (int j = 0; j < expected.Length; j++)
+                double sum = 0.0;
+                for (int r = 0; r < rowCount; r++)
                 {
-                    var output = expected[j];
-                    var input = GetRow(inputs, j);
-                    error += Backpropagation(output, input);
+                    sum += inputs[r, c];
+                }
+                var mean = sum / rowCount;
+                inputMeans[c] = mean;
+
+                double varSum = 0.0;
+                for (int r = 0; r < rowCount; r++)
+                {
+                    var d = inputs[r, c] - mean;
+                    varSum += d * d;
+                }
+                var std = Math.Sqrt(varSum / rowCount);
+                inputStds[c] = std;
+            }
+
+            var scaledInputs = new double[rowCount, colCount];
+            for (int r = 0; r < rowCount; r++)
+            {
+                for (int c = 0; c < colCount; c++)
+                {
+                    var mean = inputMeans[c];
+                    var std = inputStds[c];
+                    var v = inputs[r, c];
+                    if (Math.Abs(std) < Double.Epsilon)
+                        scaledInputs[r, c] = 0.0;
+                    else
+                        scaledInputs[r, c] = (v - mean) / std;
                 }
             }
 
-            var result = error / epoch;
+            var error = 0.0;
+            var sampleCount = expected.Length;
+
+            var indices = new int[sampleCount];
+            for (int i = 0; i < sampleCount; i++) indices[i] = i;
+
+            const double decayFactor = 0.0001;
+
+            for (int e = 0; e < epoch; e++)
+            {
+                var learningRate = Topology.LearningRate / (1.0 + decayFactor * e);
+
+                for (int i = sampleCount - 1; i > 0; i--)
+                {
+                    int j = Rnd.Next(i + 1);
+                    var tmp = indices[i];
+                    indices[i] = indices[j];
+                    indices[j] = tmp;
+                }
+
+                for (int k = 0; k < sampleCount; k++)
+                {
+                    var idx = indices[k];
+                    var output = expected[idx];
+                    var input = GetRow(scaledInputs, idx);
+                    error += Backpropagation(output, learningRate, input);
+                }
+            }
+
+            var result = error / (epoch * sampleCount);
             return result;
         }
         public static double[] GetRow(double[,] matrix, int row)
@@ -80,86 +169,47 @@ namespace NeuralNetwork
                 array[i] = matrix[row, i];
             return array;
         }
-        private double[,] Scaling(double[,] inputs)
+        private double Backpropagation(double expectedResult, double learningRate, params double[] inputs)
         {
-            var result = new double[inputs.GetLength(0), inputs.GetLength(1)];
-            for (int column = 0; column < inputs.GetLength(1); column++)
+            PredictInternal(inputs);
+
+            double sumSquaredError = 0.0;
+            var outputLayer = Layers.Last();
+            foreach (var neuron in outputLayer.Neurons)
             {
-                var min = inputs[0, column];
-                var max = inputs[0, column];
-                for (int row = 1; row < inputs.GetLength(0); row++)
-                {
-                    var item = inputs[row, column];
-                    if (item < min)
-                    {
-                        min = item;
-                    }
-                    if (item > max)
-                    {
-                        max = item;
-                    }
-                }
-
-                for (int row = 1; row < inputs.GetLength(0); row++)
-                {
-                    result[row, column] = (inputs[row, column] - min) / (max - min);
-                }
+                var neuronError = neuron.Output - expectedResult;
+                sumSquaredError += neuronError * neuronError;
+                neuron.ComputeDeltaCrossEntropy(neuronError);
             }
-            return result;
-        }
-        private double[,] Normalization(double[,] inputs)
-        {
-            var result = new double[inputs.GetLength(0), inputs.GetLength(1)];
-            for (int column = 0; column < inputs.GetLength(1); column++)
-            {
-                var sum = 0.0;
-                for (int row = 1; row < inputs.GetLength(0); row++)
-                {
-                    sum += inputs[row, column];
-                }
-                var average = sum / inputs.GetLength(0);
 
-                var error = 0.0;
-                for (int row = 1; row < inputs.GetLength(0); row++)
-                {
-                    error += Math.Pow((inputs[row, column] - average), 2);
-                }
-                var standartError = Math.Sqrt(error / inputs.GetLength(0));
-
-                for (int row = 1; row < inputs.GetLength(0); row++)
-                {
-                    result[row, column] = (inputs[row, column] - average) / standartError;
-                }
-            }
-            return result;
-        }
-        private double Backpropagation(double expectedResult, params double[] inputs)
-        {
-            var actualResult = Predict(inputs).Output;
-            var difference = actualResult - expectedResult;
-
-            foreach (var neuron in Layers.Last().Neurons)
-            {
-                neuron.Balancing(difference, Topology.LearningRate);
-            }
-            for (int j = Layers.Count - 2; j >= 0; j--)
+            for (int j = Layers.Count - 2; j >= 1; j--)
             {
                 var layer = Layers[j];
-                var previousLayer = Layers[j + 1];
+                var nextLayer = Layers[j + 1];
 
                 for (int i = 0; i < layer.NeuronsCount; i++)
                 {
                     var neuron = layer.Neurons[i];
-                    for (int k = 0; k < previousLayer.NeuronsCount; k++)
+                    double totalError = 0.0;
+                    for (int k = 0; k < nextLayer.NeuronsCount; k++)
                     {
-                        var previousNeuron = previousLayer.Neurons[k];
-                        var error = previousNeuron.Weights[i] * previousNeuron.Delta;
-                        neuron.Balancing(error, Topology.LearningRate);
+                        var nextNeuron = nextLayer.Neurons[k];
+                        totalError += nextNeuron.Weights[i] * nextNeuron.Delta;
                     }
+                    neuron.ComputeDelta(totalError);
                 }
             }
-            var result = difference * difference;
-            return result;
+
+            for (int j = 1; j < Layers.Count; j++)
+            {
+                var layer = Layers[j];
+                foreach (var neuron in layer.Neurons)
+                {
+                    neuron.UpdateWeights(learningRate);
+                }
+            }
+
+            return sumSquaredError;
         }
 
         private void CreateInputLayer()
@@ -199,7 +249,7 @@ namespace NeuralNetwork
                 var neuron = new Neuron(lastLayer.NeuronsCount, NeuronSignal.Output);
                 outputNeurons.Add(neuron);
             }
-            var outputLayer = new Layer(outputNeurons, NeuronSignal.Input);
+            var outputLayer = new Layer(outputNeurons, NeuronSignal.Output);
             Layers.Add(outputLayer);
         }
     }

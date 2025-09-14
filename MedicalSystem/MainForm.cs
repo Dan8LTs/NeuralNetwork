@@ -30,7 +30,7 @@ namespace MedicalSystem
         private void enterToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var enterdataForm = new EnterData();
-            var result = enterdataForm.ShowForm();
+            enterdataForm.ShowForm();
         }
     }
 }

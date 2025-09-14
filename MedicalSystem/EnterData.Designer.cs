@@ -30,6 +30,7 @@ namespace MedicalSystem
         private void InitializeComponent()
         {
             predictButton = new System.Windows.Forms.Button();
+            resultLabel = new System.Windows.Forms.Label();
             SuspendLayout();
             // 
             // predictButton
@@ -43,21 +44,33 @@ namespace MedicalSystem
             predictButton.UseVisualStyleBackColor = true;
             predictButton.Click += predictButton_Click;
             // 
+            // resultLabel
+            // 
+            resultLabel.AutoSize = true;
+            resultLabel.Location = new System.Drawing.Point(12, 659);
+            resultLabel.Name = "resultLabel";
+            resultLabel.Size = new System.Drawing.Size(74, 22);
+            resultLabel.TabIndex = 2;
+            resultLabel.Text = "Result:";
+            // 
             // EnterData
             // 
             AcceptButton = predictButton;
             AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(659, 707);
+            Controls.Add(resultLabel);
             Controls.Add(predictButton);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             Name = "EnterData";
             Text = "EnterData";
             ResumeLayout(false);
+            PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button predictButton;
+        private System.Windows.Forms.Label resultLabel;
     }
 }

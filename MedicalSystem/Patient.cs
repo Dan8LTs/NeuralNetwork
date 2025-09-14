@@ -1,6 +1,6 @@
 ﻿namespace MedicalSystem
 {
-    public class Patient
+    internal class Patient
     {
         public double Age { get; set; }
         public double Gender { get; set; }
@@ -15,5 +15,25 @@
         public double Slope { get; set; }
         public double MajorVesselsNumber { get; set; }
         public double Thal { get; set; }
+
+        internal double[] GetInfo()
+        {
+            return new double[]
+            {
+                Age,
+                Gender,
+                ChestPaintType,
+                BloodPressure,
+                Cholestoral,
+                Sugar,
+                Electrocardiographic,
+                HeartRate,
+                InduceAngina,
+                StDepression,
+                Slope,
+                MajorVesselsNumber,
+                Thal
+            };
+        }
     }
 }

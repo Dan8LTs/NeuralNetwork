@@ -15,8 +15,8 @@ namespace MedicalSystem
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
             Controller = new SystemController();
+            Application.Run(new MainForm());
         }
     }
 }

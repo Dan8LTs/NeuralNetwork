@@ -9,8 +9,8 @@ namespace NeuralNetwork.Tests
         public void ConvertTest()
         {
             var converter = new PictureConverter();
-            var inputs = converter.Convert(@"C:\Users\lotus\source\repos\NeuralNetwork\NeuralNetworkTests\Images\Parasitized.png");
-            converter.Save("E:\\image.png", inputs);
+            var inputs = converter.Convert(@"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\Images\Parasitized.png");
+            converter.Save("image.png", inputs);
         }
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Globalization;
 
 namespace NeuralNetwork.Tests
 {
@@ -44,14 +45,13 @@ namespace NeuralNetwork.Tests
 
             var topology = new Topology(4, 1, 0.1, 2);
             var neuralNetwork = new NeuralNetwork(topology);
-            var difference = neuralNetwork.Learn(outputs, inputs, 80000);
+            neuralNetwork.Learn(outputs, inputs, 80000);
 
             var results = new List<double>();
             for (int i = 0; i < outputs.Length; i++)
             {
                 var row = NeuralNetwork.GetRow(inputs, i);
-                var res = neuralNetwork.Predict(row).Output;
-                results.Add(res);
+                results.Add(neuralNetwork.Predict(row).Output);
             }
 
             for (int i = 0; i < results.Count; i++)
@@ -62,15 +62,16 @@ namespace NeuralNetwork.Tests
             }
         }
 
+        [TestMethod()]
         public void RecognizeImages()
         {
             var size = 1000;
-            var parasitizedPath = @"E:\cell_images\Parasitized\";
-            var unparasitizedPath = @"E:\cell_images\Unparasitized\";
+            var parasitizedPath = @"D:\Загрузки\cell_images\Parasitized\";
+            var uninfectedPath = @"D:\Загрузки\cell_images\Uninfected\";
 
             var converter = new PictureConverter();
-            var testParasitizedImageInput = converter.Convert(@"C: \Users\lotus\source\repos\NeuralNetwork\NeuralNetworkTests\Images\Parasitized.png");
-            var testUnparasitizedImageInput = converter.Convert(@"C: \Users\lotus\source\repos\NeuralNetwork\NeuralNetworkTests\Images\Unarasitized.png");
+            var testParasitizedImageInput = converter.Convert(@"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\Images\Parasitized.png");
+            var testUninfectedImageInput = converter.Convert(@"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\Images\Uninfected.png");
 
             var topology = new Topology(testParasitizedImageInput.Count, 1, 0.1, testParasitizedImageInput.Count / 2);
             var neuralNetwork = new NeuralNetwork(topology);
@@ -78,16 +79,67 @@ namespace NeuralNetwork.Tests
             double[,] parasitizedInputs = GetData(parasitizedPath, converter, testParasitizedImageInput, size);
             neuralNetwork.Learn(new double[] { 1 }, parasitizedInputs, 1);
 
-            double[,] unparasitizedInputs = GetData(unparasitizedPath, converter, testParasitizedImageInput, size);
-            neuralNetwork.Learn(new double[] { 0 }, unparasitizedInputs, 1);
+            double[,] uninfectedInputs = GetData(uninfectedPath, converter, testUninfectedImageInput, size);
+            neuralNetwork.Learn(new double[] { 0 }, uninfectedInputs, 1);
 
             var par = neuralNetwork.Predict(testParasitizedImageInput.Select(t => (double)t).ToArray());
-            var unpar = neuralNetwork.Predict(testUnparasitizedImageInput.Select(t => (double)t).ToArray());
+            var uninf = neuralNetwork.Predict(testUninfectedImageInput.Select(t => (double)t).ToArray());
 
             Assert.AreEqual(1, Math.Round(par.Output, 2));
-            Assert.AreEqual(0, Math.Round(unpar.Output, 2));
+            Assert.AreEqual(0, Math.Round(uninf.Output, 2));
         }
-        private static double[,] GetData(string parasitizedPath, PictureConverter converter, List<int> testImageInput, int size)
+
+        [TestMethod]
+        public void HeartCsvPredictionTest()
+        {
+            var path = @"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\heart.csv";
+            if (!File.Exists(path))
+            {
+                Assert.Inconclusive("CSV file not found: " + path);
+                return;
+            }
+
+            var rawLines = File.ReadAllLines(path);
+            var lines = new List<string>(rawLines.Length);
+            foreach (var ln in rawLines)
+            {
+                if (!string.IsNullOrWhiteSpace(ln))
+                    lines.Add(ln.Trim());
+            }
+
+            int rowCount = lines.Count;
+            var outputs = new double[rowCount];
+            var inputs = new double[rowCount, 13];
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                var parts = lines[i].Split(',');
+                if (parts.Length < 14)
+                {
+                    Assert.Fail($"Line {i} does not contain 14 values: '{lines[i]}'");
+                }
+                for (int j = 0; j < 13; j++)
+                {
+                    inputs[i, j] = Convert.ToDouble(parts[j].Trim(), new CultureInfo("en-US"));
+                }
+                outputs[i] = Convert.ToDouble(parts[13].Trim(), new CultureInfo("en-US"));
+            }
+
+            var topology = new Topology(13, 1, 0.1, 7);
+            var neuralNetwork = new NeuralNetwork(topology);
+
+            neuralNetwork.Learn(outputs, inputs, 80000);
+
+            for (int i = 0; i < rowCount; i++)
+            {
+                var row = NeuralNetwork.GetRow(inputs, i);
+                var pred = neuralNetwork.Predict(row).Output;
+                int predicted = pred >= 0.5 ? 1 : 0;
+                Assert.AreEqual(outputs[i], predicted, $"Row {i} mismatch: expected={outputs[i]}, predicted={pred}");
+            }
+        }
+
+        private static double[,] GetData(string parasitizedPath, PictureConverter converter, System.Collections.Generic.List<int> testImageInput, int size)
         {
             var images = Directory.GetFiles(parasitizedPath);
             var result = new double[size, testImageInput.Count];
