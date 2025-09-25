@@ -22,6 +22,29 @@ namespace MedicalSystem
                 Inputs.Add(textBox);
             }
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                var active = this.ActiveControl;
+                if (active is TextBox tb && Inputs.Contains(tb))
+                {
+                    int idx = Inputs.IndexOf(tb);
+                    if (idx >= 0 && idx < Inputs.Count - 1)
+                    {
+                        Inputs[idx + 1].Focus();
+                    }
+                    else
+                    {
+                        predictButton.Focus();
+                    }
+                    return true;
+                }
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         public void ShowForm()
         {
             if (!Program.Controller.IsDataNetworkTrained)
@@ -36,21 +59,28 @@ namespace MedicalSystem
         }
         private TextBox CreateTextBox(int number, PropertyInfo property)
         {
-            var y = number * 25 + 12;
+            int topPadding = 12;
+            int textboxHeight = 30;
+            int verticalSpacing = 10;
+            int y = topPadding + number * (textboxHeight + verticalSpacing);
+
+            int width = Math.Max(200, this.ClientSize.Width - 24);
+
             var textbox = new TextBox
             {
                 Anchor = (AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right),
                 Location = new System.Drawing.Point(12, y),
                 Name = "textBox" + number,
-                Size = new Size(454, 23),
+                Size = new Size(width, textboxHeight),
                 TabIndex = number,
                 Text = property.Name,
                 Tag = property.Name,
-                Font = new Font("Verdana", 9F, FontStyle.Italic, GraphicsUnit.Point),
+                Font = new Font("Verdana", 11F, FontStyle.Italic, GraphicsUnit.Point),
                 ForeColor = Color.Gray
             };
             textbox.GotFocus += Textbox_GotFocus;
             textbox.LostFocus += Textbox_LostFocus;
+            textbox.KeyDown += Textbox_KeyDown;
 
             return textbox;
         }
@@ -62,7 +92,7 @@ namespace MedicalSystem
             if (string.IsNullOrWhiteSpace(textbox.Text))
             {
                 textbox.Text = textbox.Tag.ToString();
-                textbox.Font = new Font("Verdana", 9F, FontStyle.Italic, GraphicsUnit.Point);
+                textbox.Font = new Font("Verdana", 11F, FontStyle.Italic, GraphicsUnit.Point);
                 textbox.ForeColor = Color.Gray;
             }
         }
@@ -74,8 +104,33 @@ namespace MedicalSystem
             if (textbox.Text == textbox.Tag.ToString())
             {
                 textbox.Text = "";
-                textbox.Font = new Font("Verdana", 10F, FontStyle.Regular, GraphicsUnit.Point);
+                textbox.Font = new Font("Verdana", 11F, FontStyle.Regular, GraphicsUnit.Point);
                 textbox.ForeColor = Color.Black;
+            }
+            else
+            {
+                textbox.Font = new Font("Verdana", 11F, FontStyle.Regular, GraphicsUnit.Point);
+                textbox.ForeColor = Color.Black;
+            }
+        }
+
+        private void Textbox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+
+                var textbox = sender as TextBox;
+                int idx = Inputs.IndexOf(textbox);
+                if (idx >= 0 && idx < Inputs.Count - 1)
+                {
+                    Inputs[idx + 1].Focus();
+                }
+                else
+                {
+                    predictButton.Focus();
+                }
             }
         }
 
@@ -83,7 +138,6 @@ namespace MedicalSystem
         {
             if (!Program.Controller.IsDataNetworkTrained)
             {
-                MessageBox.Show("The network is not trained yet. Please train the network in the main window.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 

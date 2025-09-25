@@ -70,14 +70,14 @@ namespace MedicalSystem
             // imageToolStripMenuItem
             // 
             imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            imageToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            imageToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             imageToolStripMenuItem.Text = "Check image";
             imageToolStripMenuItem.Click += imageToolStripMenuItem_Click;
             // 
             // enterToolStripMenuItem
             // 
             enterToolStripMenuItem.Name = "enterToolStripMenuItem";
-            enterToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
+            enterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
             enterToolStripMenuItem.Text = "Enter data";
             enterToolStripMenuItem.Click += enterToolStripMenuItem_Click;
             // 
@@ -143,9 +143,9 @@ namespace MedicalSystem
             imagesResultLabel.Location = new System.Drawing.Point(224, 392);
             imagesResultLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             imagesResultLabel.Name = "imagesResultLabel";
-            imagesResultLabel.Size = new System.Drawing.Size(343, 26);
+            imagesResultLabel.Size = new System.Drawing.Size(346, 26);
             imagesResultLabel.TabIndex = 9;
-            imagesResultLabel.Text = "Result: training hasn't started";
+            imagesResultLabel.Text = "Result: Training hasn't started";
             // 
             // imagesTrainButton
             // 

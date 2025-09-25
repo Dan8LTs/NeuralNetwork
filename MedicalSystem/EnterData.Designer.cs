@@ -1,5 +1,4 @@
-﻿
-namespace MedicalSystem
+﻿namespace MedicalSystem
 {
     partial class EnterData
     {
@@ -35,10 +34,10 @@ namespace MedicalSystem
             // 
             // predictButton
             // 
-            predictButton.Location = new System.Drawing.Point(539, 652);
+            predictButton.Location = new System.Drawing.Point(703, 652);
             predictButton.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             predictButton.Name = "predictButton";
-            predictButton.Size = new System.Drawing.Size(103, 36);
+            predictButton.Size = new System.Drawing.Size(140, 40);
             predictButton.TabIndex = 1;
             predictButton.Text = "Predict";
             predictButton.UseVisualStyleBackColor = true;
@@ -47,21 +46,22 @@ namespace MedicalSystem
             // resultLabel
             // 
             resultLabel.AutoSize = true;
+            resultLabel.Font = new System.Drawing.Font("Verdana", 11F);
             resultLabel.Location = new System.Drawing.Point(12, 659);
             resultLabel.Name = "resultLabel";
-            resultLabel.Size = new System.Drawing.Size(74, 22);
+            resultLabel.Size = new System.Drawing.Size(89, 26);
             resultLabel.TabIndex = 2;
             resultLabel.Text = "Result:";
             // 
             // EnterData
             // 
             AcceptButton = predictButton;
-            AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            AutoScaleDimensions = new System.Drawing.SizeF(14F, 26F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(659, 707);
+            ClientSize = new System.Drawing.Size(856, 703);
             Controls.Add(resultLabel);
             Controls.Add(predictButton);
-            Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
+            Font = new System.Drawing.Font("Verdana", 11F);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             Name = "EnterData";
             Text = "Medical System (Enter data)";
