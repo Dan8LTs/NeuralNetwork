@@ -61,9 +61,10 @@ namespace MedicalSystem
             ClientSize = new System.Drawing.Size(659, 707);
             Controls.Add(resultLabel);
             Controls.Add(predictButton);
+            Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 204);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             Name = "EnterData";
-            Text = "EnterData";
+            Text = "Medical System (Enter data)";
             ResumeLayout(false);
             PerformLayout();
 

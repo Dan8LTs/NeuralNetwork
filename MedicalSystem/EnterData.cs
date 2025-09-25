@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Globalization;
-using System.IO;
 using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace MedicalSystem
@@ -12,8 +10,6 @@ namespace MedicalSystem
     public partial class EnterData : Form
     {
         private List<TextBox> Inputs = new List<TextBox>();
-        private bool isTrained = false;
-        private string csvPath = @"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\heart.csv";
         public EnterData()
         {
             InitializeComponent();
@@ -28,41 +24,13 @@ namespace MedicalSystem
         }
         public void ShowForm()
         {
-            if (!isTrained)
+            if (!Program.Controller.IsDataNetworkTrained)
             {
-                resultLabel.Text = "Training...";
-                Task.Run(() =>
-                {
-                    try
-                    {
-                        var rawLines = File.ReadAllLines(csvPath);
-                        var lines = new List<string>(rawLines.Length);
-                        foreach (var ln in rawLines)
-                        {
-                            if (!string.IsNullOrWhiteSpace(ln))
-                                lines.Add(ln.Trim());
-                        }
-                        int rowCount = lines.Count;
-                        var outputs = new double[rowCount];
-                        var inputs = new double[rowCount, 13];
-                        for (int i = 0; i < rowCount; i++)
-                        {
-                            var parts = lines[i].Split(',');
-                            for (int j = 0; j < 13; j++)
-                            {
-                                inputs[i, j] = Convert.ToDouble(parts[j].Trim(), new CultureInfo("en-US"));
-                            }
-                            outputs[i] = Convert.ToDouble(parts[13].Trim(), new CultureInfo("en-US"));
-                        }
-                        Program.Controller.DataNetwork.Learn(outputs, inputs, 80000);
-                        isTrained = true;
-                        this.Invoke(() => resultLabel.Text = "Готово к предсказанию");
-                    }
-                    catch (Exception ex)
-                    {
-                        this.Invoke(() => MessageBox.Show("Ошибка обучения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error));
-                    }
-                });
+                resultLabel.Text = "Network not trained. Use Main window to train first.";
+            }
+            else
+            {
+                resultLabel.Text = "Ready for prediction";
             }
             this.ShowDialog();
         }
@@ -113,9 +81,9 @@ namespace MedicalSystem
 
         private void predictButton_Click(object sender, EventArgs e)
         {
-            if (!isTrained)
+            if (!Program.Controller.IsDataNetworkTrained)
             {
-                MessageBox.Show("Сеть ещё обучается. Пожалуйста, дождитесь окончания обучения.", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("The network is not trained yet. Please train the network in the main window.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
@@ -126,20 +94,20 @@ namespace MedicalSystem
                 {
                     var text = (textBox.Text ?? string.Empty).Trim();
                     if (string.IsNullOrWhiteSpace(text) || text == (textBox.Tag?.ToString() ?? string.Empty))
-                        throw new Exception($"Поле '{textBox.Tag}' не заполнено");
+                        throw new Exception($"Field '{textBox.Tag}' is empty");
 
                     var value = Convert.ToDouble(text, new CultureInfo("en-US"));
 
                     var prop = typeof(Patient).GetProperty(textBox.Tag.ToString());
                     if (prop == null)
-                        throw new Exception($"Свойство '{textBox.Tag}' не найдено в Patient");
+                        throw new Exception($"Property '{textBox.Tag}' not found in Patient");
 
                     prop.SetValue(patient, value);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Некорректный ввод: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Invalid input: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 

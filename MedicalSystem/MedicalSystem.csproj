@@ -5,10 +5,10 @@
     <TargetFramework>net10.0-windows7.0</TargetFramework>
     <UseWindowsForms>true</UseWindowsForms>
     <StartupObject>MedicalSystem.Program</StartupObject>
-    <Product>Medical system</Product>
+    <Product>LTs Medical System</Product>
     <Description>Information system for medical organizations based on a neural network.</Description>
-    <Company>LTs</Company>
-    <Copyright>Copyright © CODE BLOG 2019</Copyright>
+    <Company>Dan8LTs</Company>
+    <Copyright>Copyright © CODE BLOG 2019, © Dan8LTs </Copyright>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
     <ApplicationIcon>reportorium_6202.ico</ApplicationIcon>

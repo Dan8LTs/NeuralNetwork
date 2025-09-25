@@ -7,6 +7,8 @@ namespace MedicalSystem
         public NeuralNetwork.NeuralNetwork ImageNetwork { get; }
         public NeuralNetwork.NeuralNetwork DataNetwork { get; }
 
+        public bool IsDataNetworkTrained { get; set; } = false;
+
         public SystemController()
         {
             var imageTopology = new Topology(400, 1, 0.1, 200);
