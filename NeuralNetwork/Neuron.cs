@@ -52,7 +52,7 @@ namespace NeuralNetwork
 
             if (Signal != NeuronSignal.Input && Inputs.Count > inputs.Count)
             {
-                Inputs[inputs.Count] = 1.0; 
+                Inputs[inputs.Count] = 1.0;
             }
 
             var sum = 0.0;

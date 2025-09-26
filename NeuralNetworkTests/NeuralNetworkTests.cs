@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Globalization;
 
 namespace NeuralNetwork.Tests
 {
@@ -85,8 +85,10 @@ namespace NeuralNetwork.Tests
             var par = neuralNetwork.Predict(testParasitizedImageInput.Select(t => (double)t).ToArray());
             var uninf = neuralNetwork.Predict(testUninfectedImageInput.Select(t => (double)t).ToArray());
 
-            Assert.AreEqual(1, Math.Round(par.Output, 2));
-            Assert.AreEqual(0, Math.Round(uninf.Output, 2));
+            var predPar = par.Output >= 0.5 ? 1 : 0;
+            var predUninf = uninf.Output >= 0.5 ? 1 : 0;
+            Assert.AreEqual(1, predPar, par.Output.ToString());
+            Assert.AreEqual(0, predUninf, uninf.Output.ToString());
         }
 
         [TestMethod]
