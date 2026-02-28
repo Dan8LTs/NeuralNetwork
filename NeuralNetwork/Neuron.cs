@@ -100,11 +100,12 @@ namespace NeuralNetwork
         {
             if (Signal == NeuronSignal.Input)
                 return;
+            double regularization = 0.0045;
             for (int i = 0; i < Weights.Count; i++)
             {
                 var weight = Weights[i];
                 var input = Inputs[i];
-                var newWeight = weight - input * Delta * learningRate;
+                var newWeight = weight - learningRate * Delta * input - learningRate * regularization * weight;
                 Weights[i] = newWeight;
             }
         }

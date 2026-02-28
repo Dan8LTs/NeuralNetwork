@@ -70,14 +70,14 @@ namespace MedicalSystem
             // imageToolStripMenuItem
             // 
             imageToolStripMenuItem.Name = "imageToolStripMenuItem";
-            imageToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            imageToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             imageToolStripMenuItem.Text = "Check image";
             imageToolStripMenuItem.Click += imageToolStripMenuItem_Click;
             // 
             // enterToolStripMenuItem
             // 
             enterToolStripMenuItem.Name = "enterToolStripMenuItem";
-            enterToolStripMenuItem.Size = new System.Drawing.Size(270, 34);
+            enterToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
             enterToolStripMenuItem.Text = "Enter data";
             enterToolStripMenuItem.Click += enterToolStripMenuItem_Click;
             // 
@@ -140,7 +140,7 @@ namespace MedicalSystem
             // 
             imagesResultLabel.AutoSize = true;
             imagesResultLabel.Font = new System.Drawing.Font("Verdana", 11F);
-            imagesResultLabel.Location = new System.Drawing.Point(224, 392);
+            imagesResultLabel.Location = new System.Drawing.Point(224, 422);
             imagesResultLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             imagesResultLabel.Name = "imagesResultLabel";
             imagesResultLabel.Size = new System.Drawing.Size(346, 26);
@@ -150,7 +150,7 @@ namespace MedicalSystem
             // imagesTrainButton
             // 
             imagesTrainButton.Font = new System.Drawing.Font("Verdana", 11F);
-            imagesTrainButton.Location = new System.Drawing.Point(40, 385);
+            imagesTrainButton.Location = new System.Drawing.Point(40, 415);
             imagesTrainButton.Margin = new System.Windows.Forms.Padding(4);
             imagesTrainButton.Name = "imagesTrainButton";
             imagesTrainButton.Size = new System.Drawing.Size(143, 40);
@@ -163,7 +163,7 @@ namespace MedicalSystem
             // 
             parasitizedCheckBox.AutoSize = true;
             parasitizedCheckBox.Font = new System.Drawing.Font("Verdana", 11F);
-            parasitizedCheckBox.Location = new System.Drawing.Point(40, 297);
+            parasitizedCheckBox.Location = new System.Drawing.Point(40, 327);
             parasitizedCheckBox.Margin = new System.Windows.Forms.Padding(4);
             parasitizedCheckBox.Name = "parasitizedCheckBox";
             parasitizedCheckBox.Size = new System.Drawing.Size(436, 30);
@@ -176,7 +176,7 @@ namespace MedicalSystem
             // 
             infoLabel2.AutoSize = true;
             infoLabel2.Font = new System.Drawing.Font("Verdana", 11F);
-            infoLabel2.Location = new System.Drawing.Point(31, 247);
+            infoLabel2.Location = new System.Drawing.Point(31, 277);
             infoLabel2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             infoLabel2.Name = "infoLabel2";
             infoLabel2.Size = new System.Drawing.Size(1132, 26);
@@ -187,7 +187,7 @@ namespace MedicalSystem
             // 
             uninfectedCheckBox.AutoSize = true;
             uninfectedCheckBox.Font = new System.Drawing.Font("Verdana", 11F);
-            uninfectedCheckBox.Location = new System.Drawing.Point(40, 335);
+            uninfectedCheckBox.Location = new System.Drawing.Point(40, 365);
             uninfectedCheckBox.Margin = new System.Windows.Forms.Padding(4);
             uninfectedCheckBox.Name = "uninfectedCheckBox";
             uninfectedCheckBox.Size = new System.Drawing.Size(428, 30);
@@ -204,7 +204,7 @@ namespace MedicalSystem
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(14F, 26F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(1188, 460);
+            ClientSize = new System.Drawing.Size(1188, 532);
             Controls.Add(uninfectedCheckBox);
             Controls.Add(imagesResultLabel);
             Controls.Add(imagesTrainButton);

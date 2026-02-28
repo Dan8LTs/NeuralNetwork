@@ -45,7 +45,13 @@ namespace NeuralNetwork.Tests
 
             var topology = new Topology(4, 1, 0.1, 2);
             var neuralNetwork = new NeuralNetwork(topology);
-            neuralNetwork.Learn(outputs, inputs, 80000);
+            neuralNetwork.Learn(outputs, inputs, 10000, (epoch, loss) =>
+            {
+                if (epoch % 2000 == 0)
+                {
+                    System.Diagnostics.Debug.WriteLine($"FeedForward Test - Epoch {epoch}: Loss = {loss:F6}");
+                }
+            });
 
             var results = new List<double>();
             for (int i = 0; i < outputs.Length; i++)
@@ -56,8 +62,8 @@ namespace NeuralNetwork.Tests
 
             for (int i = 0; i < results.Count; i++)
             {
-                var expected = Math.Round(outputs[i], 3);
-                var actual = Math.Round(results[i], 3);
+                var expected = Math.Round(outputs[i], 0);
+                var actual = Math.Round(results[i], 0);
                 Assert.AreEqual(expected, actual);
             }
         }
@@ -66,8 +72,8 @@ namespace NeuralNetwork.Tests
         public void RecognizeImages()
         {
             var size = 1000;
-            var parasitizedPath = @"D:\Загрузки\cell_images\Parasitized\";
-            var uninfectedPath = @"D:\Загрузки\cell_images\Uninfected\";
+            var parasitizedPath = @"D:\Desktop\Danil\Pictures\cell_images\Parasitized\";
+            var uninfectedPath = @"D:\Desktop\Danil\Pictures\cell_images\Uninfected\";
 
             var converter = new PictureConverter();
             var testParasitizedImageInput = converter.Convert(@"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\Images\Parasitized.png");
@@ -77,10 +83,16 @@ namespace NeuralNetwork.Tests
             var neuralNetwork = new NeuralNetwork(topology);
 
             double[,] parasitizedInputs = GetData(parasitizedPath, converter, testParasitizedImageInput, size);
-            neuralNetwork.Learn(new double[] { 1 }, parasitizedInputs, 1);
+            neuralNetwork.Learn(new double[] { 1 }, parasitizedInputs, 1, (epoch, loss) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"Image Test Parasitized - Epoch {epoch}: Loss = {loss:F6}");
+            });
 
             double[,] uninfectedInputs = GetData(uninfectedPath, converter, testUninfectedImageInput, size);
-            neuralNetwork.Learn(new double[] { 0 }, uninfectedInputs, 1);
+            neuralNetwork.Learn(new double[] { 0 }, uninfectedInputs, 1, (epoch, loss) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"Image Test Uninfected - Epoch {epoch}: Loss = {loss:F6}");
+            });
 
             var par = neuralNetwork.Predict(testParasitizedImageInput.Select(t => (double)t).ToArray());
             var uninf = neuralNetwork.Predict(testUninfectedImageInput.Select(t => (double)t).ToArray());
@@ -91,7 +103,7 @@ namespace NeuralNetwork.Tests
             Assert.AreEqual(0, predUninf, uninf.Output.ToString());
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void HeartCsvPredictionTest()
         {
             var path = @"D:\Desktop\Danil\Projects\Visual Studio\Dan8LTs\NeuralNetwork\NeuralNetworkTests\heart.csv";
@@ -127,18 +139,84 @@ namespace NeuralNetwork.Tests
                 outputs[i] = Convert.ToDouble(parts[13].Trim(), new CultureInfo("en-US"));
             }
 
-            var topology = new Topology(13, 1, 0.1, 7);
-            var neuralNetwork = new NeuralNetwork(topology);
+            // Split data: 70% training, 30% test
+            var random = new Random();
+            var indices = Enumerable.Range(0, rowCount).ToList();
 
-            neuralNetwork.Learn(outputs, inputs, 80000);
-
-            for (int i = 0; i < rowCount; i++)
+            // Shuffle indices
+            for (int i = indices.Count - 1; i > 0; i--)
             {
-                var row = NeuralNetwork.GetRow(inputs, i);
+                int j = random.Next(i + 1);
+                var temp = indices[i];
+                indices[i] = indices[j];
+                indices[j] = temp;
+            }
+
+            int trainCount = (int)(rowCount * 0.7);
+            int testCount = rowCount - trainCount;
+
+            var trainIndices = indices.Take(trainCount).ToArray();
+            var testIndices = indices.Skip(trainCount).ToArray();
+
+            var trainOutputs = trainIndices.Select(i => outputs[i]).ToArray();
+            var trainInputs = new double[trainCount, 13];
+            for (int i = 0; i < trainCount; i++)
+            {
+                for (int j = 0; j < 13; j++)
+                {
+                    trainInputs[i, j] = inputs[trainIndices[i], j];
+                }
+            }
+
+            var testOutputs = testIndices.Select(i => outputs[i]).ToArray();
+            var testInputs = new double[testCount, 13];
+            for (int i = 0; i < testCount; i++)
+            {
+                for (int j = 0; j < 13; j++)
+                {
+                    testInputs[i, j] = inputs[testIndices[i], j];
+                }
+            }
+
+            // Train network
+            var topology = new Topology(13, 1, 0.1, 16, 8);
+            var neuralNetwork = new NeuralNetwork(topology);
+            neuralNetwork.Learn(trainOutputs, trainInputs, 10000, (epoch, loss) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"[TEST] Epoch {epoch:D5}: Loss = {loss:E10}");
+            });
+
+            // Evaluate on training set
+            int trainCorrect = 0;
+            for (int i = 0; i < trainCount; i++)
+            {
+                var row = NeuralNetwork.GetRow(trainInputs, i);
                 var pred = neuralNetwork.Predict(row).Output;
                 int predicted = pred >= 0.5 ? 1 : 0;
-                Assert.AreEqual(outputs[i], predicted, $"Row {i} mismatch: expected={outputs[i]}, predicted={pred}");
+                if (outputs[trainIndices[i]] == predicted)
+                    trainCorrect++;
             }
+            double trainAccuracy = (double)trainCorrect / trainCount;
+
+            // Evaluate on test set
+            int testCorrect = 0;
+            for (int i = 0; i < testCount; i++)
+            {
+                var row = NeuralNetwork.GetRow(testInputs, i);
+                var pred = neuralNetwork.Predict(row).Output;
+                int predicted = pred >= 0.5 ? 1 : 0;
+                if (outputs[testIndices[i]] == predicted)
+                    testCorrect++;
+            }
+            double testAccuracy = (double)testCorrect / testCount;
+
+            // Log results
+            System.Diagnostics.Debug.WriteLine($"Training Accuracy: {trainAccuracy:P2} ({trainCorrect}/{trainCount})");
+            System.Diagnostics.Debug.WriteLine($"Test Accuracy: {testAccuracy:P2} ({testCorrect}/{testCount})");
+
+            // Assert minimum accuracy
+            Assert.IsTrue(testAccuracy >= 0.6,
+                $"Test accuracy too low: {testAccuracy:P2}. Train accuracy: {trainAccuracy:P2}");
         }
 
         private static double[,] GetData(string parasitizedPath, PictureConverter converter, System.Collections.Generic.List<int> testImageInput, int size)

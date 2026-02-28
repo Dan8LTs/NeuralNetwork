@@ -87,7 +87,7 @@ namespace NeuralNetwork
             }
         }
 
-        public double Learn(double[] expected, double[,] inputs, int epoch)
+        public double Learn(double[] expected, double[,] inputs, int epoch, Action<int, double> onEpochComplete = null)
         {
             var rowCount = inputs.GetLength(0);
             var colCount = inputs.GetLength(1);
@@ -129,13 +129,13 @@ namespace NeuralNetwork
                 }
             }
 
-            var error = 0.0;
+            var totalError = 0.0;
             var sampleCount = expected.Length;
 
             var indices = new int[sampleCount];
             for (int i = 0; i < sampleCount; i++) indices[i] = i;
 
-            const double decayFactor = 0.0001;
+            const double decayFactor = 0.0009;
 
             for (int e = 0; e < epoch; e++)
             {
@@ -149,16 +149,25 @@ namespace NeuralNetwork
                     indices[j] = tmp;
                 }
 
+                double epochError = 0.0;
                 for (int k = 0; k < sampleCount; k++)
                 {
                     var idx = indices[k];
                     var output = expected[idx];
                     var input = GetRow(scaledInputs, idx);
-                    error += Backpropagation(output, learningRate, input);
+                    epochError += Backpropagation(output, learningRate, input);
+                }
+                totalError += epochError;
+
+                // Log every 1000 epochs
+                if ((e + 1) % 1000 == 0)
+                {
+                    double epochAvgLoss = epochError / sampleCount;
+                    onEpochComplete?.Invoke(e + 1, epochAvgLoss);
                 }
             }
 
-            var result = error / (epoch * sampleCount);
+            var result = totalError / (epoch * sampleCount);
             return result;
         }
         public static double[] GetRow(double[,] matrix, int row)
