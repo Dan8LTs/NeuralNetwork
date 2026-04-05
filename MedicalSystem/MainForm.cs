@@ -181,10 +181,10 @@ namespace MedicalSystem
                     {
                         if (epoch % 1000 == 0)
                         {
-                            this.Invoke(() =>
+                            this.Invoke(new Action(() =>
                             {
                                 heartResultLabel.Text = $"Результат: Обучение... Эпоха {epoch}/{heartEpochs}, Loss = {loss:F6}";
-                            });
+                            }));
                         }
                     });
                     Program.Controller.IsDataNetworkTrained = true;
@@ -212,23 +212,23 @@ namespace MedicalSystem
                     }
                     double valAccuracy = (double)valCorrect / valCount;
 
-                    this.Invoke(() =>
+                    this.Invoke(new Action(() =>
                     {
                         heartResultLabel.Text =
                             $"Результат: Обучение завершено\r\n" +
                             $"Точность (обучение): {trainAccuracy:P1} ({trainCorrect}/{trainCount})\r\n" +
                             $"Точность (валидация): {valAccuracy:P1} ({valCorrect}/{valCount})";
                         heartTrainButton.Enabled = true;
-                    });
+                    }));
                 }
                 catch (Exception ex)
                 {
-                    this.Invoke(() =>
+                    this.Invoke(new Action(() =>
                     {
                         MessageBox.Show("Ошибка обучения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         heartResultLabel.Text = "Результат: Ошибка обучения";
                         heartTrainButton.Enabled = true;
-                    });
+                    }));
                 }
             });
         }
@@ -360,10 +360,10 @@ namespace MedicalSystem
                     {
                         if (epoch % 10 == 0)
                         {
-                            this.Invoke(() =>
+                            this.Invoke(new Action(() =>
                             {
                                 imagesResultLabel.Text = $"Результат: Обучение... Эпоха {epoch}/{epochs}, Loss = {loss:F6}";
-                            });
+                            }));
                         }
                     });
 
@@ -387,23 +387,23 @@ namespace MedicalSystem
                     }
                     double valAccuracy = (double)valCorrect / valCount;
 
-                    this.Invoke(() =>
+                    this.Invoke(new Action(() =>
                     {
                         imagesResultLabel.Text =
                             $"Результат: Обучение завершено\r\n" +
                             $"Точность (обучение): {trainAccuracy:P1} ({trainCorrect}/{trainCount})\r\n" +
                             $"Точность (валидация): {valAccuracy:P1} ({valCorrect}/{valCount})";
                         imagesTrainButton.Enabled = true;
-                    });
+                    }));
                 }
                 catch (Exception ex)
                 {
-                    this.Invoke(() =>
+                    this.Invoke(new Action(() =>
                     {
                         MessageBox.Show("Ошибка обучения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         imagesResultLabel.Text = "Результат: Ошибка обучения";
                         imagesTrainButton.Enabled = true;
-                    });
+                    }));
                 }
             });
         }
