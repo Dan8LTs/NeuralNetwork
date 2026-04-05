@@ -9,12 +9,18 @@ using System.Windows.Forms;
 
 namespace MedicalSystem
 {
+    /// <summary>
+    /// Главная форма приложения: управление обучением и тестированием нейронных сетей
+    /// </summary>
     public partial class MainForm : Form
     {
         private string heartFilename = string.Empty;
         private string parasitizedFilename = string.Empty;
         private string uninfectedFilename = string.Empty;
 
+        /// <summary>
+        /// Инициализирует главную форму
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -41,7 +47,7 @@ namespace MedicalSystem
         private void heartCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             OpenFileDialog heartFileDialog = new OpenFileDialog();
-            heartFileDialog.Filter = "Table (*.csv)|*.csv";
+            heartFileDialog.Filter = "Таблица (*.csv)|*.csv";
             if (heartFileDialog.ShowDialog() == DialogResult.OK)
             {
                 heartFilename = heartFileDialog.FileName;
@@ -51,7 +57,7 @@ namespace MedicalSystem
             {
                 heartCheckBox.Checked = false;
                 heartFilename = string.Empty;
-                heartCheckBox.Text = "Click to select file...";
+                heartCheckBox.Text = "Нажмите для выбора файла...";
             }
         }
 
@@ -59,11 +65,11 @@ namespace MedicalSystem
         {
             if (string.IsNullOrWhiteSpace(heartFilename) || !File.Exists(heartFilename))
             {
-                heartResultLabel.Text = "Result: Select a valid path to heart.csv before starting training.";
+                heartResultLabel.Text = "Результат: Укажите корректный путь к heart.csv.";
                 return;
             }
 
-            heartResultLabel.Text = "Result: Training...";
+            heartResultLabel.Text = "Результат: Обучение...";
             heartTrainButton.Enabled = false;
 
             Task.Run(() =>
@@ -129,7 +135,8 @@ namespace MedicalSystem
                     }
 
                     // Split data: 70% training, 30% validation
-                    var random = new Random();
+                    RandomProvider.ResetSeed(42);
+                    var random = RandomProvider.Instance;
                     var indices = Enumerable.Range(0, rowCount).ToList();
 
                     // Shuffle indices
@@ -168,10 +175,17 @@ namespace MedicalSystem
                     }
 
                     // Train network on training set
+                    const int heartEpochs = 10000;
                     Program.Controller.ResetDataNetwork();
-                    Program.Controller.DataNetwork.Learn(trainOutputs, trainInputs, 10000, (epoch, loss) =>
+                    Program.Controller.DataNetwork.Learn(trainOutputs, trainInputs, heartEpochs, (epoch, loss) =>
                     {
-                        System.Diagnostics.Debug.WriteLine($"Epoch {epoch:D5}: Loss = {loss:E10}");
+                        if (epoch % 1000 == 0)
+                        {
+                            this.Invoke(() =>
+                            {
+                                heartResultLabel.Text = $"Результат: Обучение... Эпоха {epoch}/{heartEpochs}, Loss = {loss:F6}";
+                            });
+                        }
                     });
                     Program.Controller.IsDataNetworkTrained = true;
 
@@ -200,10 +214,10 @@ namespace MedicalSystem
 
                     this.Invoke(() =>
                     {
-                        heartResultLabel.Text = 
-                            $"Result: Training completed\r\n" +
-                            $"Train Accuracy: {trainAccuracy:P1} ({trainCorrect}/{trainCount})\r\n" +
-                            $"Validation Accuracy: {valAccuracy:P1} ({valCorrect}/{valCount})";
+                        heartResultLabel.Text =
+                            $"Результат: Обучение завершено\r\n" +
+                            $"Точность (обучение): {trainAccuracy:P1} ({trainCorrect}/{trainCount})\r\n" +
+                            $"Точность (валидация): {valAccuracy:P1} ({valCorrect}/{valCount})";
                         heartTrainButton.Enabled = true;
                     });
                 }
@@ -211,8 +225,8 @@ namespace MedicalSystem
                 {
                     this.Invoke(() =>
                     {
-                        MessageBox.Show("Training error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        heartResultLabel.Text = "Result: Training failed";
+                        MessageBox.Show("Ошибка обучения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        heartResultLabel.Text = "Результат: Ошибка обучения";
                         heartTrainButton.Enabled = true;
                     });
                 }
@@ -223,7 +237,7 @@ namespace MedicalSystem
         {
             using (var dlg = new FolderBrowserDialog())
             {
-                dlg.Description = "Select folder with Parasitized images";
+                dlg.Description = "Выберите папку с заражёнными изображениями";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     parasitizedFilename = dlg.SelectedPath;
@@ -234,7 +248,7 @@ namespace MedicalSystem
                 {
                     parasitizedCheckBox.Checked = false;
                     parasitizedFilename = string.Empty;
-                    parasitizedCheckBox.Text = "(Parasitized) Click to select path... ";
+                    parasitizedCheckBox.Text = "(Заражённые) Выбрать папку...";
                 }
             }
         }
@@ -243,7 +257,7 @@ namespace MedicalSystem
         {
             using (var dlg = new FolderBrowserDialog())
             {
-                dlg.Description = "Select folder with Uninfected images";
+                dlg.Description = "Выберите папку с незаражёнными изображениями";
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     uninfectedFilename = dlg.SelectedPath;
@@ -254,7 +268,7 @@ namespace MedicalSystem
                 {
                     uninfectedCheckBox.Checked = false;
                     uninfectedFilename = string.Empty;
-                    uninfectedCheckBox.Text = "(Uninfected) Click to select path...";
+                    uninfectedCheckBox.Text = "(Незаражённые) Выбрать папку...";
                 }
             }
         }
@@ -263,49 +277,122 @@ namespace MedicalSystem
         {
             if (string.IsNullOrWhiteSpace(parasitizedFilename) || string.IsNullOrWhiteSpace(uninfectedFilename) || !Directory.Exists(parasitizedFilename) || !Directory.Exists(uninfectedFilename))
             {
-                imagesResultLabel.Text = "Result: Select valid folders for parasitized and uninfected images.";
+                imagesResultLabel.Text = "Результат: Выберите папки с изображениями.";
                 return;
             }
 
-            imagesResultLabel.Text = "Result: Training...";
+            imagesResultLabel.Text = "Результат: Обучение...";
             imagesTrainButton.Enabled = false;
 
             Task.Run(() =>
             {
                 try
                 {
+                    const int size = 500;
+                    const int epochs = 50;
+
                     var converter = new PictureConverter();
+                    converter.GrayscaleMode = true;
+
                     var parasitizedFiles = Directory.GetFiles(parasitizedFilename, "*.png");
                     var uninfectedFiles = Directory.GetFiles(uninfectedFilename, "*.png");
                     if (parasitizedFiles.Length == 0 || uninfectedFiles.Length == 0)
                         throw new Exception("No PNG images found in one of the selected folders.");
 
-                    var testParasitizedImageInput = converter.Convert(parasitizedFiles.First());
-                    var testUninfectedImageInput = converter.Convert(uninfectedFiles.First());
+                    var sampleImage = converter.Convert(parasitizedFiles[0]);
+                    var inputSize = sampleImage.Count;
 
-                    Program.Controller.CreateImageNetwork(testParasitizedImageInput.Count);
+                    double[,] parasitizedInputs = GetData(parasitizedFilename, converter, inputSize, size);
+                    double[,] uninfectedInputs = GetData(uninfectedFilename, converter, inputSize, size);
 
-                    double[,] parasitizedInputs = GetData(parasitizedFilename, converter, testParasitizedImageInput);
-                    int parasitizedSize = parasitizedInputs.GetLength(0);
-                    var expectedPar = Enumerable.Repeat(1.0, parasitizedSize).ToArray();
-                    Program.Controller.ImageNetwork.Learn(expectedPar, parasitizedInputs, 1, (epoch, loss) =>
+                    int parSize = parasitizedInputs.GetLength(0);
+                    int uninfSize = uninfectedInputs.GetLength(0);
+                    int totalSize = parSize + uninfSize;
+
+                    var inputs = new double[totalSize, inputSize];
+                    var outputs = new double[totalSize];
+
+                    for (int i = 0; i < parSize; i++)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Parasitized - Epoch {epoch}: Loss = {loss:E10}");
-                    });
-
-                    double[,] uninfectedInputs = GetData(uninfectedFilename, converter, testUninfectedImageInput);
-                    int uninfectedSize = uninfectedInputs.GetLength(0);
-                    var expectedUn = Enumerable.Repeat(0.0, uninfectedSize).ToArray();
-                    Program.Controller.ImageNetwork.Learn(expectedUn, uninfectedInputs, 1, (epoch, loss) =>
+                        for (int j = 0; j < inputSize; j++)
+                            inputs[i, j] = parasitizedInputs[i, j];
+                        outputs[i] = 1.0;
+                    }
+                    for (int i = 0; i < uninfSize; i++)
                     {
-                        System.Diagnostics.Debug.WriteLine($"Uninfected - Epoch {epoch}: Loss = {loss:E10}");
+                        for (int j = 0; j < inputSize; j++)
+                            inputs[parSize + i, j] = uninfectedInputs[i, j];
+                        outputs[parSize + i] = 0.0;
+                    }
+
+                    // Split 70% train / 30% validation — аналогично heartTrainButton_Click
+                    RandomProvider.ResetSeed(42);
+                    var random = RandomProvider.Instance;
+                    var indices = Enumerable.Range(0, totalSize).ToList();
+                    for (int i = indices.Count - 1; i > 0; i--)
+                    {
+                        int j = random.Next(i + 1);
+                        var temp = indices[i];
+                        indices[i] = indices[j];
+                        indices[j] = temp;
+                    }
+
+                    int trainCount = (int)(totalSize * 0.7);
+                    int valCount = totalSize - trainCount;
+
+                    var trainIndices = indices.Take(trainCount).ToArray();
+                    var valIndices = indices.Skip(trainCount).ToArray();
+
+                    var trainOutputs = trainIndices.Select(i => outputs[i]).ToArray();
+                    var trainInputs = new double[trainCount, inputSize];
+                    for (int i = 0; i < trainCount; i++)
+                        for (int j = 0; j < inputSize; j++)
+                            trainInputs[i, j] = inputs[trainIndices[i], j];
+
+                    var valOutputs = valIndices.Select(i => outputs[i]).ToArray();
+                    var valInputs = new double[valCount, inputSize];
+                    for (int i = 0; i < valCount; i++)
+                        for (int j = 0; j < inputSize; j++)
+                            valInputs[i, j] = inputs[valIndices[i], j];
+
+                    Program.Controller.CreateImageNetwork(inputSize);
+                    Program.Controller.ImageNetwork.Learn(trainOutputs, trainInputs, epochs, (epoch, loss) =>
+                    {
+                        if (epoch % 10 == 0)
+                        {
+                            this.Invoke(() =>
+                            {
+                                imagesResultLabel.Text = $"Результат: Обучение... Эпоха {epoch}/{epochs}, Loss = {loss:F6}";
+                            });
+                        }
                     });
 
                     Program.Controller.IsImageNetworkTrained = true;
 
+                    int trainCorrect = 0;
+                    for (int i = 0; i < trainCount; i++)
+                    {
+                        var row = NeuralNetwork.NeuralNetwork.GetRow(trainInputs, i);
+                        var pred = Program.Controller.ImageNetwork.Predict(row).Output;
+                        if ((pred >= 0.5 ? 1 : 0) == (int)trainOutputs[i]) trainCorrect++;
+                    }
+                    double trainAccuracy = (double)trainCorrect / trainCount;
+
+                    int valCorrect = 0;
+                    for (int i = 0; i < valCount; i++)
+                    {
+                        var row = NeuralNetwork.NeuralNetwork.GetRow(valInputs, i);
+                        var pred = Program.Controller.ImageNetwork.Predict(row).Output;
+                        if ((pred >= 0.5 ? 1 : 0) == (int)valOutputs[i]) valCorrect++;
+                    }
+                    double valAccuracy = (double)valCorrect / valCount;
+
                     this.Invoke(() =>
                     {
-                        imagesResultLabel.Text = "Result: Ready for prediction";
+                        imagesResultLabel.Text =
+                            $"Результат: Обучение завершено\r\n" +
+                            $"Точность (обучение): {trainAccuracy:P1} ({trainCorrect}/{trainCount})\r\n" +
+                            $"Точность (валидация): {valAccuracy:P1} ({valCorrect}/{valCount})";
                         imagesTrainButton.Enabled = true;
                     });
                 }
@@ -313,28 +400,36 @@ namespace MedicalSystem
                 {
                     this.Invoke(() =>
                     {
-                        MessageBox.Show("Training error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        imagesResultLabel.Text = "Result: Training failed";
+                        MessageBox.Show("Ошибка обучения: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        imagesResultLabel.Text = "Результат: Ошибка обучения";
                         imagesTrainButton.Enabled = true;
                     });
                 }
             });
         }
 
-        private static double[,] GetData(string folderPath, PictureConverter converter, System.Collections.Generic.List<int> testImageInput)
+        private static double[,] GetData(string folderPath, PictureConverter converter, int inputSize, int maxSize)
         {
-            var imageFiles = Directory.GetFiles(folderPath, "*.png");
+            var allFiles = Directory.GetFiles(folderPath, "*.png");
 
-            var rows = new List<int[]>();
-            foreach (var file in imageFiles)
+            var rng = new Random(42);
+            for (int i = allFiles.Length - 1; i > 0; i--)
             {
+                int j = rng.Next(i + 1);
+                var tmp = allFiles[i];
+                allFiles[i] = allFiles[j];
+                allFiles[j] = tmp;
+            }
+
+            var rows = new List<double[]>();
+            foreach (var file in allFiles)
+            {
+                if (rows.Count >= maxSize) break;
                 try
                 {
                     var image = converter.Convert(file);
-                    if (image != null && image.Count == testImageInput.Count)
-                    {
-                        rows.Add(image.ToArray());
-                    }
+                    if (image != null && image.Count == inputSize)
+                        rows.Add(image.Select(v => (double)v).ToArray());
                 }
                 catch
                 {
@@ -345,14 +440,10 @@ namespace MedicalSystem
             if (rows.Count == 0)
                 throw new Exception("No valid PNG images found in folder: " + folderPath);
 
-            var result = new double[rows.Count, testImageInput.Count];
+            var result = new double[rows.Count, inputSize];
             for (int i = 0; i < rows.Count; i++)
-            {
-                for (int j = 0; j < testImageInput.Count; j++)
-                {
+                for (int j = 0; j < inputSize; j++)
                     result[i, j] = rows[i][j];
-                }
-            }
             return result;
         }
     }

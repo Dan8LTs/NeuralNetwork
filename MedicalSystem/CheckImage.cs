@@ -8,12 +8,18 @@ using System.Windows.Forms;
 
 namespace MedicalSystem
 {
+    /// <summary>
+    /// Форма для классификации изображений клеток (зараженные vs незараженные)
+    /// </summary>
     public partial class CheckImage : Form
     {
         private string imagePath = string.Empty;
         private List<int> lastConvertedPixels;
         private int previewScale = 8;
 
+        /// <summary>
+        /// Инициализирует форму и проверяет статус обучения сети
+        /// </summary>
         public CheckImage()
         {
             InitializeComponent();
@@ -24,11 +30,11 @@ namespace MedicalSystem
         {
             if (!Program.Controller.IsImageNetworkTrained)
             {
-                resultLabel.Text = "Result: Network not trained. Use Main window to train first.";
+                resultLabel.Text = "Результат: Сеть не обучена. Обучите её в главном окне.";
             }
             else
             {
-                resultLabel.Text = "Result: Ready for prediction";
+                resultLabel.Text = "Результат: Готово к предсказанию";
             }
         }
 
@@ -42,7 +48,7 @@ namespace MedicalSystem
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
             {
-                openFileDialog.Filter = "Images (*.png)|*.png";
+                openFileDialog.Filter = "Изображения (*.png)|*.png";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     imagePath = openFileDialog.FileName;
@@ -52,6 +58,7 @@ namespace MedicalSystem
                     try
                     {
                         var converter = new PictureConverter();
+                        converter.GrayscaleMode = true;
                         lastConvertedPixels = converter.Convert(imagePath);
 
                         var bmp = CreatePreviewBitmap(converter.Width, converter.Height, lastConvertedPixels, previewScale);
@@ -60,7 +67,7 @@ namespace MedicalSystem
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Preview error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Ошибка предпросмотра: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
@@ -75,7 +82,7 @@ namespace MedicalSystem
             if (!imageCheckBox.Checked)
             {
                 imagePath = string.Empty;
-                imageCheckBox.Text = "Click to select image...";
+                imageCheckBox.Text = "Нажмите для выбора изображения...";
                 lastConvertedPixels = null;
                 previewBox.Image?.Dispose();
                 previewBox.Image = null;
@@ -96,7 +103,8 @@ namespace MedicalSystem
                     for (int x = 0; x < width; x++)
                     {
                         var v = pixels[y * width + x];
-                        var color = v == 1 ? Color.White : Color.Black;
+                        var gray = Math.Min(255, Math.Max(0, v));
+                        var color = Color.FromArgb(gray, gray, gray);
                         using (var brush = new SolidBrush(color))
                         {
                             g.FillRectangle(brush, x * scale, y * scale, scale, scale);
@@ -116,7 +124,7 @@ namespace MedicalSystem
 
             if (string.IsNullOrWhiteSpace(imagePath) || !File.Exists(imagePath))
             {
-                resultLabel.Text = "Result: Select a valid image first.";
+                resultLabel.Text = "Результат: Выберите корректное изображение.";
                 return;
             }
 
@@ -130,6 +138,7 @@ namespace MedicalSystem
                 else
                 {
                     var converter = new PictureConverter();
+                    converter.GrayscaleMode = true;
                     var pixels = converter.Convert(imagePath);
                     inputs = pixels.Select(i => (double)i).ToArray();
                 }
@@ -138,16 +147,16 @@ namespace MedicalSystem
                 var result = outputNeuron.Output;
                 if (result >= 0.5)
                 {
-                    resultLabel.Text = $"Result: Cell is parasitized ({result.ToString()})";
+                    resultLabel.Text = $"Результат: Клетка заражена ({result:F4})";
                 }
                 else
                 {
-                    resultLabel.Text = $"Result: Cell is uninfected ({result.ToString()})";
+                    resultLabel.Text = $"Результат: Клетка не заражена ({result:F4})";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Prediction error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Ошибка предсказания: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

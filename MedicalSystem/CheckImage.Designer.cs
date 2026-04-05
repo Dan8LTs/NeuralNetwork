@@ -60,20 +60,20 @@ namespace MedicalSystem
             imageCheckBox.AutoSize = true;
             imageCheckBox.Location = new System.Drawing.Point(24, 73);
             imageCheckBox.Name = "imageCheckBox";
-            imageCheckBox.Size = new System.Drawing.Size(289, 30);
+            imageCheckBox.Size = new System.Drawing.Size(464, 30);
             imageCheckBox.TabIndex = 1;
-            imageCheckBox.Text = "Click to select image...";
+            imageCheckBox.Text = "Нажмите для выбора изображения...";
             imageCheckBox.UseVisualStyleBackColor = true;
             imageCheckBox.CheckedChanged += imageCheckBox_CheckedChanged;
             imageCheckBox.Click += imageCheckBox_Click;
             // 
             // predictButton
             // 
-            predictButton.Location = new System.Drawing.Point(786, 443);
+            predictButton.Location = new System.Drawing.Point(742, 443);
             predictButton.Name = "predictButton";
-            predictButton.Size = new System.Drawing.Size(122, 34);
+            predictButton.Size = new System.Drawing.Size(166, 34);
             predictButton.TabIndex = 2;
-            predictButton.Text = "Predict";
+            predictButton.Text = "Предсказать";
             predictButton.UseVisualStyleBackColor = true;
             predictButton.Click += predictButton_Click;
             // 
@@ -82,9 +82,9 @@ namespace MedicalSystem
             label1.AutoSize = true;
             label1.Location = new System.Drawing.Point(24, 31);
             label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(426, 26);
+            label1.Size = new System.Drawing.Size(529, 26);
             label1.TabIndex = 4;
-            label1.Text = "Path to the cell image in PNG format:";
+            label1.Text = "Путь к изображению клетки в формате PNG:";
             // 
             // CheckImage
             // 
@@ -98,7 +98,7 @@ namespace MedicalSystem
             Controls.Add(resultLabel);
             Font = new System.Drawing.Font("Verdana", 11F);
             Name = "CheckImage";
-            Text = "Medical System (Check image)";
+            Text = "Медицинская система (Проверка изображения)";
             ((System.ComponentModel.ISupportInitialize)previewBox).EndInit();
             ResumeLayout(false);
             PerformLayout();

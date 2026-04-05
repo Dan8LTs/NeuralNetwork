@@ -3,11 +3,16 @@ using System.Windows.Forms;
 
 namespace MedicalSystem
 {
+    /// <summary>
+    /// Точка входа медицинской системы анализа данных
+    /// </summary>
     static class Program
     {
+        /// <summary>Глобальный контроллер для управления нейронными сетями</summary>
         public static SystemController Controller { get; private set; }
+
         /// <summary>
-        ///  The main entry point for the application.
+        /// Точка входа приложения
         /// </summary>
         [STAThread]
         static void Main()

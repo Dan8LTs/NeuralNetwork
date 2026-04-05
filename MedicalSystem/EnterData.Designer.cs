@@ -39,7 +39,7 @@
             predictButton.Name = "predictButton";
             predictButton.Size = new System.Drawing.Size(140, 40);
             predictButton.TabIndex = 1;
-            predictButton.Text = "Predict";
+            predictButton.Text = "Предсказать";
             predictButton.UseVisualStyleBackColor = true;
             predictButton.Click += predictButton_Click;
             // 
@@ -51,7 +51,7 @@
             resultLabel.Name = "resultLabel";
             resultLabel.Size = new System.Drawing.Size(89, 26);
             resultLabel.TabIndex = 2;
-            resultLabel.Text = "Result:";
+            resultLabel.Text = "Результат:";
             // 
             // EnterData
             // 
@@ -64,7 +64,7 @@
             Font = new System.Drawing.Font("Verdana", 11F);
             Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             Name = "EnterData";
-            Text = "Medical System (Enter data)";
+            Text = "Медицинская система (Ввод данных)";
             ResumeLayout(false);
             PerformLayout();
 

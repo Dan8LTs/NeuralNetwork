@@ -7,9 +7,17 @@ using System.Windows.Forms;
 
 namespace MedicalSystem
 {
+    /// <summary>
+    /// Форма для ввода данных пациента и получения прогноза от сети анализа данных
+    /// </summary>
     public partial class EnterData : Form
     {
+        /// <summary>Список текстовых полей для ввода 13 медицинских параметров</summary>
         private List<TextBox> Inputs = new List<TextBox>();
+
+        /// <summary>
+        /// Инициализирует форму: динамически создает текстовые поля для всех параметров Patient
+        /// </summary>
         public EnterData()
         {
             InitializeComponent();
@@ -49,11 +57,11 @@ namespace MedicalSystem
         {
             if (!Program.Controller.IsDataNetworkTrained)
             {
-                resultLabel.Text = "Network not trained. Use Main window to train first.";
+                resultLabel.Text = "Сеть не обучена. Обучите её в главном окне.";
             }
             else
             {
-                resultLabel.Text = "Ready for prediction";
+                resultLabel.Text = "Готово к предсказанию";
             }
             this.ShowDialog();
         }
@@ -161,18 +169,18 @@ namespace MedicalSystem
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Invalid input: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Некорректный ввод: " + ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             double result = Program.Controller.DataNetwork.Predict(patient.GetInfo()).Output;
             if (result >= 0.5)
             {
-                resultLabel.Text = "Result: " + $"Patient is sick ({result.ToString()})";
+                resultLabel.Text = $"Результат: Пациент болен ({result:F4})";
             }
             else
             {
-                resultLabel.Text = "Result: " + $"Patient is healthy ({result.ToString()})";
+                resultLabel.Text = $"Результат: Пациент здоров ({result:F4})";
             }
         }
     }

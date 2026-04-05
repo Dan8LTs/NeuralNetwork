@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace NeuralNetwork
 {
+    /// <summary>Нейронная сеть: слои, обучение, предсказание</summary>
     public class NeuralNetwork
     {
         public Topology Topology { get; }
@@ -11,8 +12,6 @@ namespace NeuralNetwork
 
         private double[] inputMeans;
         private double[] inputStds;
-
-        private static readonly Random Rnd = new Random();
 
         public NeuralNetwork(Topology topology)
         {
@@ -24,6 +23,7 @@ namespace NeuralNetwork
             CreateOutputLayer();
         }
 
+        /// <summary>Предсказание с нормализацией входных данных</summary>
         public Neuron Predict(params double[] inputSignals)
         {
             if (inputMeans != null && inputStds != null && inputSignals != null && inputSignals.Length == inputMeans.Length)
@@ -33,7 +33,7 @@ namespace NeuralNetwork
                 {
                     var mean = inputMeans[i];
                     var std = inputStds[i];
-                    if (Math.Abs(std) < Double.Epsilon)
+                    if (Math.Abs(std) < double.Epsilon)
                     {
                         scaled[i] = 0.0;
                     }
@@ -64,6 +64,7 @@ namespace NeuralNetwork
             }
         }
 
+        /// <summary>Прямое распространение сигнала через слои</summary>
         private void FeedForwardLayers()
         {
             for (int i = 1; i < Layers.Count; i++)
@@ -87,11 +88,13 @@ namespace NeuralNetwork
             }
         }
 
+        /// <summary>Обучение сети на данных с нормализацией и decay learning rate</summary>
         public double Learn(double[] expected, double[,] inputs, int epoch, Action<int, double> onEpochComplete = null)
         {
             var rowCount = inputs.GetLength(0);
             var colCount = inputs.GetLength(1);
 
+            // Z-score нормализация
             inputMeans = new double[colCount];
             inputStds = new double[colCount];
             for (int c = 0; c < colCount; c++)
@@ -110,10 +113,11 @@ namespace NeuralNetwork
                     var d = inputs[r, c] - mean;
                     varSum += d * d;
                 }
-                var std = Math.Sqrt(varSum / rowCount);
+                var std = Math.Sqrt(varSum / (rowCount - 1 > 0 ? rowCount - 1 : 1));
                 inputStds[c] = std;
             }
 
+            // Нормализация входных данных
             var scaledInputs = new double[rowCount, colCount];
             for (int r = 0; r < rowCount; r++)
             {
@@ -122,7 +126,7 @@ namespace NeuralNetwork
                     var mean = inputMeans[c];
                     var std = inputStds[c];
                     var v = inputs[r, c];
-                    if (Math.Abs(std) < Double.Epsilon)
+                    if (Math.Abs(std) < double.Epsilon)
                         scaledInputs[r, c] = 0.0;
                     else
                         scaledInputs[r, c] = (v - mean) / std;
@@ -133,17 +137,20 @@ namespace NeuralNetwork
             var sampleCount = expected.Length;
 
             var indices = new int[sampleCount];
-            for (int i = 0; i < sampleCount; i++) indices[i] = i;
+            for (int i = 0; i < sampleCount; i++)
+                indices[i] = i;
 
-            const double decayFactor = 0.0009;
+            const double decayFactor = 0.0008;
 
+            // Основной цикл обучения
             for (int e = 0; e < epoch; e++)
             {
                 var learningRate = Topology.LearningRate / (1.0 + decayFactor * e);
 
+                // Перемешивание данных
                 for (int i = sampleCount - 1; i > 0; i--)
                 {
-                    int j = Rnd.Next(i + 1);
+                    int j = RandomProvider.Instance.Next(i + 1);
                     var tmp = indices[i];
                     indices[i] = indices[j];
                     indices[j] = tmp;
@@ -153,23 +160,31 @@ namespace NeuralNetwork
                 for (int k = 0; k < sampleCount; k++)
                 {
                     var idx = indices[k];
-                    var output = expected[idx];
-                    var input = GetRow(scaledInputs, idx);
-                    epochError += Backpropagation(output, learningRate, input);
+                    epochError += Backpropagation(expected[idx], learningRate, GetRow(scaledInputs, idx));
                 }
                 totalError += epochError;
 
-                // Log every 1000 epochs
-                if ((e + 1) % 1000 == 0)
+                // Вычислить реальный loss после всех обновлений весов эпохи
+                if (onEpochComplete != null)
                 {
-                    double epochAvgLoss = epochError / sampleCount;
-                    onEpochComplete?.Invoke(e + 1, epochAvgLoss);
+                    double evalError = 0.0;
+                    for (int k = 0; k < sampleCount; k++)
+                    {
+                        PredictInternal(GetRow(scaledInputs, k));
+                        foreach (var neuron in Layers.Last().Neurons)
+                        {
+                            var err = neuron.Output - expected[k];
+                            evalError += err * err;
+                        }
+                    }
+                    onEpochComplete.Invoke(e + 1, evalError / sampleCount);
                 }
             }
 
             var result = totalError / (epoch * sampleCount);
             return result;
         }
+
         public static double[] GetRow(double[,] matrix, int row)
         {
             var columns = matrix.GetLength(1);
@@ -178,6 +193,8 @@ namespace NeuralNetwork
                 array[i] = matrix[row, i];
             return array;
         }
+
+        /// <summary>Обратное распространение ошибки и обновление весов</summary>
         private double Backpropagation(double expectedResult, double learningRate, params double[] inputs)
         {
             PredictInternal(inputs);
@@ -214,7 +231,7 @@ namespace NeuralNetwork
                 var layer = Layers[j];
                 foreach (var neuron in layer.Neurons)
                 {
-                    neuron.UpdateWeights(learningRate);
+                    neuron.UpdateWeights(learningRate, Topology.Momentum, Topology.Regularization);
                 }
             }
 

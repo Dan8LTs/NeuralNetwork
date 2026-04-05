@@ -65,20 +65,20 @@ namespace MedicalSystem
             fileToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9F);
             fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             fileToolStripMenuItem.Size = new System.Drawing.Size(57, 26);
-            fileToolStripMenuItem.Text = "File";
+            fileToolStripMenuItem.Text = "Файл";
             // 
             // imageToolStripMenuItem
             // 
             imageToolStripMenuItem.Name = "imageToolStripMenuItem";
             imageToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
-            imageToolStripMenuItem.Text = "Check image";
+            imageToolStripMenuItem.Text = "Проверить изображение";
             imageToolStripMenuItem.Click += imageToolStripMenuItem_Click;
             // 
             // enterToolStripMenuItem
             // 
             enterToolStripMenuItem.Name = "enterToolStripMenuItem";
             enterToolStripMenuItem.Size = new System.Drawing.Size(227, 34);
-            enterToolStripMenuItem.Text = "Enter data";
+            enterToolStripMenuItem.Text = "Ввод данных";
             enterToolStripMenuItem.Click += enterToolStripMenuItem_Click;
             // 
             // aboutToolStripMenuItem
@@ -86,7 +86,7 @@ namespace MedicalSystem
             aboutToolStripMenuItem.Font = new System.Drawing.Font("Verdana", 9F);
             aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             aboutToolStripMenuItem.Size = new System.Drawing.Size(78, 26);
-            aboutToolStripMenuItem.Text = "About";
+            aboutToolStripMenuItem.Text = "О программе";
             aboutToolStripMenuItem.Click += aboutToolStripMenuItem_Click;
             // 
             // infoLabel1
@@ -98,7 +98,7 @@ namespace MedicalSystem
             infoLabel1.Name = "infoLabel1";
             infoLabel1.Size = new System.Drawing.Size(848, 26);
             infoLabel1.TabIndex = 2;
-            infoLabel1.Text = "Path to the neural network training file with heart disease data (heart.csv):";
+            infoLabel1.Text = "Путь к файлу обучения нейронной сети с данными о заболеваниях сердца (heart.csv):";
             // 
             // heartCheckBox
             // 
@@ -109,7 +109,7 @@ namespace MedicalSystem
             heartCheckBox.Name = "heartCheckBox";
             heartCheckBox.Size = new System.Drawing.Size(255, 30);
             heartCheckBox.TabIndex = 3;
-            heartCheckBox.Text = "Click to select file...";
+            heartCheckBox.Text = "Нажмите для выбора файла...";
             heartCheckBox.UseVisualStyleBackColor = true;
             heartCheckBox.CheckedChanged += heartCheckBox_CheckedChanged;
             // 
@@ -121,7 +121,7 @@ namespace MedicalSystem
             heartTrainButton.Name = "heartTrainButton";
             heartTrainButton.Size = new System.Drawing.Size(143, 40);
             heartTrainButton.TabIndex = 4;
-            heartTrainButton.Text = "Train";
+            heartTrainButton.Text = "Обучить";
             heartTrainButton.UseVisualStyleBackColor = true;
             heartTrainButton.Click += heartTrainButton_Click;
             // 
@@ -134,7 +134,7 @@ namespace MedicalSystem
             heartResultLabel.Name = "heartResultLabel";
             heartResultLabel.Size = new System.Drawing.Size(346, 26);
             heartResultLabel.TabIndex = 5;
-            heartResultLabel.Text = "Result: Training hasn't started";
+            heartResultLabel.Text = "Результат: Обучение не начато";
             // 
             // imagesResultLabel
             // 
@@ -145,7 +145,7 @@ namespace MedicalSystem
             imagesResultLabel.Name = "imagesResultLabel";
             imagesResultLabel.Size = new System.Drawing.Size(346, 26);
             imagesResultLabel.TabIndex = 9;
-            imagesResultLabel.Text = "Result: Training hasn't started";
+            imagesResultLabel.Text = "Результат: Обучение не начато";
             // 
             // imagesTrainButton
             // 
@@ -155,7 +155,7 @@ namespace MedicalSystem
             imagesTrainButton.Name = "imagesTrainButton";
             imagesTrainButton.Size = new System.Drawing.Size(143, 40);
             imagesTrainButton.TabIndex = 8;
-            imagesTrainButton.Text = "Train";
+            imagesTrainButton.Text = "Обучить";
             imagesTrainButton.UseVisualStyleBackColor = true;
             imagesTrainButton.Click += imagesTrainButton_Click;
             // 
@@ -168,7 +168,7 @@ namespace MedicalSystem
             parasitizedCheckBox.Name = "parasitizedCheckBox";
             parasitizedCheckBox.Size = new System.Drawing.Size(436, 30);
             parasitizedCheckBox.TabIndex = 7;
-            parasitizedCheckBox.Text = "(Parasitized) Click to select folder... ";
+            parasitizedCheckBox.Text = "(Заражённые) Выбрать папку...";
             parasitizedCheckBox.UseVisualStyleBackColor = true;
             parasitizedCheckBox.CheckedChanged += parasitizedCheckBox_CheckedChanged;
             // 
@@ -181,7 +181,7 @@ namespace MedicalSystem
             infoLabel2.Name = "infoLabel2";
             infoLabel2.Size = new System.Drawing.Size(1132, 26);
             infoLabel2.TabIndex = 6;
-            infoLabel2.Text = "Paths to the neural network training folders with cell images in PNG format (Parasitized, Uninfected):";
+            infoLabel2.Text = "Пути к папкам с изображениями клеток в формате PNG (Заражённые, Незаражённые):";
             // 
             // uninfectedCheckBox
             // 
@@ -192,7 +192,7 @@ namespace MedicalSystem
             uninfectedCheckBox.Name = "uninfectedCheckBox";
             uninfectedCheckBox.Size = new System.Drawing.Size(428, 30);
             uninfectedCheckBox.TabIndex = 10;
-            uninfectedCheckBox.Text = "(Uninfected) Click to select folder...";
+            uninfectedCheckBox.Text = "(Незаражённые) Выбрать папку...";
             uninfectedCheckBox.UseVisualStyleBackColor = true;
             uninfectedCheckBox.CheckedChanged += uninfectedCheckBox_CheckedChanged;
             // 
@@ -220,7 +220,7 @@ namespace MedicalSystem
             MainMenuStrip = menuStrip1;
             Margin = new System.Windows.Forms.Padding(5, 6, 5, 6);
             Name = "MainForm";
-            Text = "Medical System (Training models)";
+            Text = "Медицинская система (Обучение моделей)";
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
