@@ -84,28 +84,12 @@ namespace NeuralNetwork.Tests
 
             // Пути к обучающим данным
             var outputPath = AppDomain.CurrentDomain.BaseDirectory;
-
-            // Поднимаемся до корня проекта NeuralNetworkTests
-            // .NET 10: bin\Debug\net10.0-windows -> up 3 levels
-            // .NET Framework: bin\Debug -> up 2 levels
             var projectPath = Path.GetFullPath(Path.Combine(outputPath, "..", "..", ".."));
-
-            // Если путь не содержит Images (значит, не в корне NeuralNetworkTests), пробуем вариант для .NET Framework
-            if (!Directory.Exists(Path.Combine(projectPath, "Images")))
-            {
-                projectPath = Path.GetFullPath(Path.Combine(outputPath, "..", ".."));
-            }
 
             var parasitizedPath = Path.Combine(projectPath, @"Images\Parasitized\");
             var uninfectedPath = Path.Combine(projectPath, @"Images\Uninfected\");
             var testParasitizedImagePath = Path.Combine(projectPath, @"Images\Parasitized.png");
             var testUninfectedImagePath = Path.Combine(projectPath, @"Images\Uninfected.png");
-
-            // Проверяем наличие нужных файлов и папок
-            Assert.IsTrue(File.Exists(testParasitizedImagePath), $"Файл не найден: {testParasitizedImagePath}");
-            Assert.IsTrue(File.Exists(testUninfectedImagePath), $"Файл не найден: {testUninfectedImagePath}");
-            Assert.IsTrue(Directory.Exists(parasitizedPath), $"Папка не найдена: {parasitizedPath}");
-            Assert.IsTrue(Directory.Exists(uninfectedPath), $"Папка не найдена: {uninfectedPath}");
 
             var converter = new PictureConverter();
             converter.GrayscaleMode = true;
