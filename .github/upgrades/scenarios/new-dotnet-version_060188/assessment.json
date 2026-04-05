@@ -1,0 +1,1112 @@
+{
+  "settings": {
+    "components": {
+      "code": true,
+      "binaries": false
+    },
+    "targetId": "net10.0",
+    "targetDisplayName": ".NETCoreApp,Version=v10.0"
+  },
+  "analysisStartTime": "2026-04-05T22:16:24.8021272Z",
+  "analysisEndTime": "2026-04-05T22:16:26.6596404Z",
+  "privacyModeHelpUrl": "https://go.microsoft.com/fwlink/?linkid=2270980",
+  "stats": {
+    "summary": {
+      "projects": 3,
+      "issues": 4,
+      "incidents": 38,
+      "effort": 38
+    },
+    "charts": {
+      "severity": {
+        "Mandatory": 4,
+        "Optional": 0,
+        "Potential": 34,
+        "Information": 0
+      },
+      "category": {
+        "Project": 4,
+        "Api": 34
+      }
+    }
+  },
+  "projects": [
+    {
+      "path": "MedicalSystem\\MedicalSystem.csproj",
+      "startingProject": true,
+      "issues": 0,
+      "storyPoints": 0,
+      "properties": {
+        "appName": "MedicalSystem",
+        "projectKind": "WinForms",
+        "frameworks": [
+          "net10.0-windows7.0"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": true,
+        "numberOfFiles": 17,
+        "numberOfCodeFiles": 12,
+        "linesTotal": 17237,
+        "linesOfCode": 1749,
+        "totalApiScanned": 0,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [],
+      "features": []
+    },
+    {
+      "path": "NeuralNetwork\\NeuralNetwork.csproj",
+      "startingProject": true,
+      "issues": 3,
+      "storyPoints": 36,
+      "properties": {
+        "appName": "NeuralNetwork",
+        "projectKind": "ClassicWpf",
+        "frameworks": [
+          "net48"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "numberOfFiles": 8,
+        "numberOfCodeFiles": 8,
+        "linesTotal": 615,
+        "linesOfCode": 615,
+        "totalApiScanned": 521,
+        "minLinesOfCodeToChange": 34,
+        "maxLinesOfCodeToChange": 34
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "cc93804c-1132-44b8-a069-83de36f6dc01",
+          "ruleId": "Project.0001",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "NeuralNetwork\\NeuralNetwork.csproj"
+          }
+        },
+        {
+          "incidentId": "53496e5f-ffb2-42a8-a8c0-1628091c0497",
+          "ruleId": "Project.0002",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0-windows",
+              "protected": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0-windows"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\NeuralNetwork.csproj",
+            "snippet": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0-windows",
+            "protectedSnippet": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0-windows",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.8",
+              "RecommendedTargetFramework": "net10.0-windows"
+            }
+          }
+        },
+        {
+          "incidentId": "349cbe59-db78-4f30-9acf-12f7827dcf66",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "image.Save(path);",
+              "protected": "M:System.Drawing.Image.Save(System.String)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "image.Save(path);",
+            "protectedSnippet": "M:System.Drawing.Image.Save(System.String)",
+            "label": "M:System.Drawing.Image.Save(System.String)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 65,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "19f750f8-945c-4d02-ad41-3529154390b3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));",
+              "protected": "M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));",
+            "protectedSnippet": "M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)",
+            "label": "M:System.Drawing.Bitmap.SetPixel(System.Int32,System.Int32,System.Drawing.Color)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 62,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "0a36cd99-9ff9-424a-8da9-f3597fdbc26c",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "for (int x = 0; x \u003C image.Width; x\u002B\u002B)\r\n                {\r\n                    var rawValue = pixels[y * Width \u002B x];\r\n                    var gray = GrayscaleMode ? rawValue : (rawValue == 1 ? 255 : 0);\r\n                    image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));\r\n                }",
+              "protected": "P:System.Drawing.Image.Width"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "for (int x = 0; x \u003C image.Width; x\u002B\u002B)\r\n                {\r\n                    var rawValue = pixels[y * Width \u002B x];\r\n                    var gray = GrayscaleMode ? rawValue : (rawValue == 1 ? 255 : 0);\r\n                    image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));\r\n                }",
+            "protectedSnippet": "P:System.Drawing.Image.Width",
+            "label": "P:System.Drawing.Image.Width",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 58,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "3fd86cda-bdb9-45ed-8ae3-e1b9cf11bc70",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "for (int y = 0; y \u003C image.Height; y\u002B\u002B)\r\n            {\r\n                for (int x = 0; x \u003C image.Width; x\u002B\u002B)\r\n                {\r\n                    var rawValue = pixels[y * Width \u002B x];\r\n                    var gray = GrayscaleMode ? rawValue : (rawValue == 1 ? 255 : 0);\r\n                    image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));\r\n                }\r\n            }",
+              "protected": "P:System.Drawing.Image.Height"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "for (int y = 0; y \u003C image.Height; y\u002B\u002B)\r\n            {\r\n                for (int x = 0; x \u003C image.Width; x\u002B\u002B)\r\n                {\r\n                    var rawValue = pixels[y * Width \u002B x];\r\n                    var gray = GrayscaleMode ? rawValue : (rawValue == 1 ? 255 : 0);\r\n                    image.SetPixel(x, y, Color.FromArgb(gray, gray, gray));\r\n                }\r\n            }",
+            "protectedSnippet": "P:System.Drawing.Image.Height",
+            "label": "P:System.Drawing.Image.Height",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 56,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "12a020ea-b6d7-4f71-b8cc-31dff8b16bae",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var image = new Bitmap(Width, Height);",
+              "protected": "T:System.Drawing.Bitmap"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var image = new Bitmap(Width, Height);",
+            "protectedSnippet": "T:System.Drawing.Bitmap",
+            "label": "T:System.Drawing.Bitmap",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "b4edb75a-b5ea-4135-b678-61da02f22b75",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var image = new Bitmap(Width, Height);",
+              "protected": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var image = new Bitmap(Width, Height);",
+            "protectedSnippet": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)",
+            "label": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 55,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "62f97fef-3ba1-4320-9883-c3cad786704a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var pixel = resizeImage.GetPixel(x, y);",
+              "protected": "M:System.Drawing.Bitmap.GetPixel(System.Int32,System.Int32)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var pixel = resizeImage.GetPixel(x, y);",
+            "protectedSnippet": "M:System.Drawing.Bitmap.GetPixel(System.Int32,System.Int32)",
+            "label": "M:System.Drawing.Bitmap.GetPixel(System.Int32,System.Int32)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 36,
+            "column": 20
+          }
+        },
+        {
+          "incidentId": "42794fea-0fff-46de-bdee-1c455f535e03",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "for (int x = 0; x \u003C resizeImage.Width; x\u002B\u002B)\r\n                {\r\n                    var pixel = resizeImage.GetPixel(x, y);\r\n                    result.Add(Brightness(pixel));\r\n                }",
+              "protected": "P:System.Drawing.Image.Width"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "for (int x = 0; x \u003C resizeImage.Width; x\u002B\u002B)\r\n                {\r\n                    var pixel = resizeImage.GetPixel(x, y);\r\n                    result.Add(Brightness(pixel));\r\n                }",
+            "protectedSnippet": "P:System.Drawing.Image.Width",
+            "label": "P:System.Drawing.Image.Width",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 34,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "848bad79-7541-4502-bf84-e61c3c12a30a",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "for (int y = 0; y \u003C resizeImage.Height; y\u002B\u002B)\r\n            {\r\n                for (int x = 0; x \u003C resizeImage.Width; x\u002B\u002B)\r\n                {\r\n                    var pixel = resizeImage.GetPixel(x, y);\r\n                    result.Add(Brightness(pixel));\r\n                }\r\n            }",
+              "protected": "P:System.Drawing.Image.Height"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "for (int y = 0; y \u003C resizeImage.Height; y\u002B\u002B)\r\n            {\r\n                for (int x = 0; x \u003C resizeImage.Width; x\u002B\u002B)\r\n                {\r\n                    var pixel = resizeImage.GetPixel(x, y);\r\n                    result.Add(Brightness(pixel));\r\n                }\r\n            }",
+            "protectedSnippet": "P:System.Drawing.Image.Height",
+            "label": "P:System.Drawing.Image.Height",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 32,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "74c0d88b-3113-479d-969f-9565f07b62bc",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Width = resizeImage.Width;",
+              "protected": "P:System.Drawing.Image.Width"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "Width = resizeImage.Width;",
+            "protectedSnippet": "P:System.Drawing.Image.Width",
+            "label": "P:System.Drawing.Image.Width",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 30,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "780fb928-c6fd-4a49-a9e7-119f5d691093",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "Height = resizeImage.Height;",
+              "protected": "P:System.Drawing.Image.Height"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "Height = resizeImage.Height;",
+            "protectedSnippet": "P:System.Drawing.Image.Height",
+            "label": "P:System.Drawing.Image.Height",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 29,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "5ffdec1f-a74f-4867-b936-4218e182619d",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.DrawImage(image, 0, 0, 30, 30);",
+              "protected": "M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.DrawImage(image, 0, 0, 30, 30);",
+            "protectedSnippet": "M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32)",
+            "label": "M:System.Drawing.Graphics.DrawImage(System.Drawing.Image,System.Int32,System.Int32,System.Int32,System.Int32)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 26,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "1a8b16c3-1f26-4491-bfdf-64b213b11456",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.PixelOffsetMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "label": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 25,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "5621faed-2202-428d-be93-8805e639b463",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.PixelOffsetMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "label": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 25,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "60bf6f6c-b4df-4d02-a133-c80112f2eae4",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+              "protected": "F:System.Drawing.Drawing2D.PixelOffsetMode.HighQuality"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+            "protectedSnippet": "F:System.Drawing.Drawing2D.PixelOffsetMode.HighQuality",
+            "label": "F:System.Drawing.Drawing2D.PixelOffsetMode.HighQuality",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 25,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "76cdf085-a317-4099-bfa8-b468a3240668",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.PixelOffsetMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "label": "T:System.Drawing.Drawing2D.PixelOffsetMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 25,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "232b5d7a-9f1f-4c9f-a308-bc2a42e971e2",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+              "protected": "P:System.Drawing.Graphics.PixelOffsetMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.PixelOffsetMode = PixelOffsetMode.HighQuality;",
+            "protectedSnippet": "P:System.Drawing.Graphics.PixelOffsetMode",
+            "label": "P:System.Drawing.Graphics.PixelOffsetMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 25,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "46017a14-8bd0-47ad-b71c-6f41d98971a1",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.SmoothingMode = SmoothingMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.SmoothingMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.SmoothingMode = SmoothingMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "label": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 24,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "d8745c35-ce37-449d-8dbe-16d74f7b0a80",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.SmoothingMode = SmoothingMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.SmoothingMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.SmoothingMode = SmoothingMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "label": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 24,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "0a2d8138-7be5-4b62-bdd5-242690a40891",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.SmoothingMode = SmoothingMode.HighQuality;",
+              "protected": "F:System.Drawing.Drawing2D.SmoothingMode.HighQuality"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.SmoothingMode = SmoothingMode.HighQuality;",
+            "protectedSnippet": "F:System.Drawing.Drawing2D.SmoothingMode.HighQuality",
+            "label": "F:System.Drawing.Drawing2D.SmoothingMode.HighQuality",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 24,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "27ec2ecc-6097-44f2-8656-e27c169966d3",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.SmoothingMode = SmoothingMode.HighQuality;",
+              "protected": "T:System.Drawing.Drawing2D.SmoothingMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.SmoothingMode = SmoothingMode.HighQuality;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "label": "T:System.Drawing.Drawing2D.SmoothingMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 24,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "312d2cb0-d38f-48e3-8e02-77bef3a677f1",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.SmoothingMode = SmoothingMode.HighQuality;",
+              "protected": "P:System.Drawing.Graphics.SmoothingMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.SmoothingMode = SmoothingMode.HighQuality;",
+            "protectedSnippet": "P:System.Drawing.Graphics.SmoothingMode",
+            "label": "P:System.Drawing.Graphics.SmoothingMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 24,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "b2fc45ad-5c2b-42b5-b60b-b6eaf9217d07",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+              "protected": "T:System.Drawing.Drawing2D.InterpolationMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "label": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 23,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "90712a4d-f217-4833-95ec-3f135b47f49b",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+              "protected": "T:System.Drawing.Drawing2D.InterpolationMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "label": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 23,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "86ce1212-5ebd-4d4f-a979-4fce381139ed",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+              "protected": "F:System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+            "protectedSnippet": "F:System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic",
+            "label": "F:System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 23,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "16fa6370-79c5-4881-99de-e9767728b57b",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+              "protected": "T:System.Drawing.Drawing2D.InterpolationMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+            "protectedSnippet": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "label": "T:System.Drawing.Drawing2D.InterpolationMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 23,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "ccbafa41-a7d6-4605-87b7-cd39a385815c",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+              "protected": "P:System.Drawing.Graphics.InterpolationMode"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "g.InterpolationMode = InterpolationMode.HighQualityBicubic;",
+            "protectedSnippet": "P:System.Drawing.Graphics.InterpolationMode",
+            "label": "P:System.Drawing.Graphics.InterpolationMode",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 23,
+            "column": 16
+          }
+        },
+        {
+          "incidentId": "41dd0c81-e770-44bc-8332-d87c444cd73c",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+              "protected": "T:System.Drawing.Graphics"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+            "protectedSnippet": "T:System.Drawing.Graphics",
+            "label": "T:System.Drawing.Graphics",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "415d510a-916f-43cb-a781-56fc30a29b29",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+              "protected": "T:System.Drawing.Graphics"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+            "protectedSnippet": "T:System.Drawing.Graphics",
+            "label": "T:System.Drawing.Graphics",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "362f9f8f-fe3f-46e4-9401-2ade4fb36b09",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+              "protected": "M:System.Drawing.Graphics.FromImage(System.Drawing.Image)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "using (var g = Graphics.FromImage(resizeImage))\r\n            {\r\n                g.InterpolationMode = InterpolationMode.HighQualityBicubic;\r\n                g.SmoothingMode = SmoothingMode.HighQuality;\r\n                g.PixelOffsetMode = PixelOffsetMode.HighQuality;\r\n                g.DrawImage(image, 0, 0, 30, 30);\r\n            }",
+            "protectedSnippet": "M:System.Drawing.Graphics.FromImage(System.Drawing.Image)",
+            "label": "M:System.Drawing.Graphics.FromImage(System.Drawing.Image)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 21,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "554997a3-46ad-4e12-929a-6b0d782d9f02",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var resizeImage = new Bitmap(30, 30);",
+              "protected": "T:System.Drawing.Bitmap"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var resizeImage = new Bitmap(30, 30);",
+            "protectedSnippet": "T:System.Drawing.Bitmap",
+            "label": "T:System.Drawing.Bitmap",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 20,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "bf6bc12c-a3ed-4f94-be30-e8abeda3cd05",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var resizeImage = new Bitmap(30, 30);",
+              "protected": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var resizeImage = new Bitmap(30, 30);",
+            "protectedSnippet": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)",
+            "label": "M:System.Drawing.Bitmap.#ctor(System.Int32,System.Int32)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 20,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "f1366b8d-3344-4a10-a8d7-8c36d05f1164",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var image = new Bitmap(path);",
+              "protected": "T:System.Drawing.Bitmap"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var image = new Bitmap(path);",
+            "protectedSnippet": "T:System.Drawing.Bitmap",
+            "label": "T:System.Drawing.Bitmap",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 18,
+            "column": 12
+          }
+        },
+        {
+          "incidentId": "169e9ac3-6dd2-4ab1-a590-fbbf07bd66b0",
+          "ruleId": "Api.0002",
+          "description": "API is available in package System.Drawing.Common, 8.0.6. Add package reference to System.Drawing.Common, 8.0.6",
+          "projectPath": "NeuralNetwork\\NeuralNetwork.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "var image = new Bitmap(path);",
+              "protected": "M:System.Drawing.Bitmap.#ctor(System.String)"
+            },
+            "kind": "File",
+            "path": "NeuralNetwork\\PictureConverter.cs",
+            "snippet": "var image = new Bitmap(path);",
+            "protectedSnippet": "M:System.Drawing.Bitmap.#ctor(System.String)",
+            "label": "M:System.Drawing.Bitmap.#ctor(System.String)",
+            "properties": {
+              "PackageId": "System.Drawing.Common",
+              "PackageNewVersion": "8.0.6"
+            },
+            "line": 18,
+            "column": 12
+          }
+        }
+      ],
+      "features": [
+        {
+          "featureId": "GdiDrawing",
+          "incidents": [
+            "169e9ac3-6dd2-4ab1-a590-fbbf07bd66b0",
+            "f1366b8d-3344-4a10-a8d7-8c36d05f1164",
+            "bf6bc12c-a3ed-4f94-be30-e8abeda3cd05",
+            "554997a3-46ad-4e12-929a-6b0d782d9f02",
+            "362f9f8f-fe3f-46e4-9401-2ade4fb36b09",
+            "415d510a-916f-43cb-a781-56fc30a29b29",
+            "41dd0c81-e770-44bc-8332-d87c444cd73c",
+            "ccbafa41-a7d6-4605-87b7-cd39a385815c",
+            "16fa6370-79c5-4881-99de-e9767728b57b",
+            "86ce1212-5ebd-4d4f-a979-4fce381139ed",
+            "90712a4d-f217-4833-95ec-3f135b47f49b",
+            "b2fc45ad-5c2b-42b5-b60b-b6eaf9217d07",
+            "312d2cb0-d38f-48e3-8e02-77bef3a677f1",
+            "27ec2ecc-6097-44f2-8656-e27c169966d3",
+            "0a2d8138-7be5-4b62-bdd5-242690a40891",
+            "d8745c35-ce37-449d-8dbe-16d74f7b0a80",
+            "46017a14-8bd0-47ad-b71c-6f41d98971a1",
+            "232b5d7a-9f1f-4c9f-a308-bc2a42e971e2",
+            "76cdf085-a317-4099-bfa8-b468a3240668",
+            "60bf6f6c-b4df-4d02-a133-c80112f2eae4",
+            "5621faed-2202-428d-be93-8805e639b463",
+            "1a8b16c3-1f26-4491-bfdf-64b213b11456",
+            "5ffdec1f-a74f-4867-b936-4218e182619d",
+            "780fb928-c6fd-4a49-a9e7-119f5d691093",
+            "74c0d88b-3113-479d-969f-9565f07b62bc",
+            "848bad79-7541-4502-bf84-e61c3c12a30a",
+            "42794fea-0fff-46de-bdee-1c455f535e03",
+            "62f97fef-3ba1-4320-9883-c3cad786704a",
+            "b4edb75a-b5ea-4135-b678-61da02f22b75",
+            "12a020ea-b6d7-4f71-b8cc-31dff8b16bae",
+            "3fd86cda-bdb9-45ed-8ae3-e1b9cf11bc70",
+            "0a36cd99-9ff9-424a-8da9-f3597fdbc26c",
+            "19f750f8-945c-4d02-ad41-3529154390b3",
+            "349cbe59-db78-4f30-9acf-12f7827dcf66"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "NeuralNetworkTests\\NeuralNetworkTests.csproj",
+      "startingProject": true,
+      "issues": 2,
+      "storyPoints": 2,
+      "properties": {
+        "appName": "NeuralNetworkTests",
+        "projectKind": "ClassicClassLibrary",
+        "frameworks": [
+          "net48"
+        ],
+        "languages": [
+          "C#"
+        ],
+        "tools": [
+          "MSBuild"
+        ],
+        "isSdkStyle": false,
+        "numberOfFiles": 1016,
+        "numberOfCodeFiles": 3,
+        "linesTotal": 87752,
+        "linesOfCode": 246,
+        "totalApiScanned": 0,
+        "minLinesOfCodeToChange": 0,
+        "maxLinesOfCodeToChange": 0
+      },
+      "ruleInstances": [
+        {
+          "incidentId": "95a6b84d-3621-47e8-9cb8-3060c2ec60e6",
+          "ruleId": "Project.0001",
+          "projectPath": "NeuralNetworkTests\\NeuralNetworkTests.csproj",
+          "state": "Active",
+          "location": {
+            "kind": "File",
+            "path": "NeuralNetworkTests\\NeuralNetworkTests.csproj"
+          }
+        },
+        {
+          "incidentId": "1eda10cb-78f0-49d6-aa31-92a4d26a1e9c",
+          "ruleId": "Project.0002",
+          "projectPath": "NeuralNetworkTests\\NeuralNetworkTests.csproj",
+          "state": "Active",
+          "location": {
+            "snippetModel": {
+              "unrestricted": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0",
+              "protected": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0"
+            },
+            "kind": "File",
+            "path": "NeuralNetworkTests\\NeuralNetworkTests.csproj",
+            "snippet": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0",
+            "protectedSnippet": "\u0422\u0435\u043A\u0443\u0449\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: .NETFramework,Version=v4.8\n\u0420\u0435\u043A\u043E\u043C\u0435\u043D\u0434\u0443\u0435\u043C\u0430\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430: net10.0",
+            "properties": {
+              "CurrentTargetFramework": ".NETFramework,Version=v4.8",
+              "RecommendedTargetFramework": "net10.0"
+            }
+          }
+        }
+      ],
+      "features": []
+    }
+  ],
+  "rules": {
+    "Project.0001": {
+      "id": "Project.0001",
+      "isFeature": false,
+      "description": "\u0424\u0430\u0439\u043B \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u043F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u0442\u044C \u0432 \u0441\u0442\u0438\u043B\u044C \u043F\u0430\u043A\u0435\u0442\u0430 SDK. \u041F\u0440\u043E\u0435\u043A\u0442\u044B \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u043E\u0439 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B .NET \u0442\u0440\u0435\u0431\u0443\u044E\u0442 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0444\u043E\u0440\u043C\u0430\u0442\u0430 \u0444\u0430\u0439\u043B\u0430 \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u0438 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043D\u0438\u044F \u043F\u0430\u043A\u0435\u0442\u0430 SDK, \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0435\u0433\u043E \u0432\u0430\u0440\u0438\u0430\u043D\u0442\u0443 \u0438 \u0444\u0443\u043D\u043A\u0446\u0438\u043E\u043D\u0430\u043B\u044C\u043D\u043E\u0441\u0442\u0438 \u043F\u0440\u043E\u0435\u043A\u0442\u0430.",
+      "label": "\u0424\u0430\u0439\u043B \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u043F\u0440\u0435\u043E\u0431\u0440\u0430\u0437\u043E\u0432\u0430\u0442\u044C \u0432 \u0441\u0442\u0438\u043B\u044C \u043F\u0430\u043A\u0435\u0442\u0430 SDK",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "\u041E\u0431\u0437\u043E\u0440 \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430 \u0441 .NET Framework \u043D\u0430 .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": "\u041F\u0430\u043A\u0435\u0442\u044B SDK \u043F\u0440\u043E\u0435\u043A\u0442\u0430 .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Project.0002": {
+      "id": "Project.0002",
+      "isFeature": false,
+      "description": "\u0426\u0435\u043B\u0435\u0432\u0443\u044E \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443 \u0438\u043B\u0438 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u043D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043D\u0430 \u043D\u043E\u0432\u0443\u044E \u0446\u0435\u043B\u0435\u0432\u0443\u044E \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443, \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u0443\u044E \u0434\u043B\u044F \u044D\u0442\u043E\u0433\u043E \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F.\n\n\u0412\u043E \u0432\u0440\u0435\u043C\u044F \u043E\u0431\u043D\u043E\u0432\u043B\u0435\u043D\u0438\u044F \u0446\u0435\u043B\u0435\u0432\u0430\u044F \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0430 \u0431\u0443\u0434\u0435\u0442 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0430 \u043D\u0430 \u0441\u043E\u043E\u0442\u0432\u0435\u0442\u0441\u0442\u0432\u0443\u044E\u0449\u0443\u044E \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u0443, \u043A\u043E\u0433\u0434\u0430 \u044D\u0442\u043E \u043F\u0440\u0438\u043C\u0435\u043D\u0438\u043C\u043E. \u0412 \u043D\u0435\u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0441\u043B\u0443\u0447\u0430\u044F\u0445 \u0440\u0435\u0430\u043B\u0438\u0437\u0430\u0446\u0438\u044F \u043F\u0440\u043E\u0435\u043A\u0442\u0430 \u043F\u0440\u0438\u0432\u0435\u0434\u0435\u0442 \u043A \u043D\u0430\u043B\u0438\u0447\u0438\u044E \u043D\u0435\u0441\u043A\u043E\u043B\u044C\u043A\u0438\u0445 \u0446\u0435\u043B\u0435\u0432\u044B\u0445 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C, \u0435\u0441\u043B\u0438 \u0432 \u043F\u0440\u043E\u0435\u043A\u0442\u0435 \u0438\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u043B\u0438\u0441\u044C \u043A\u043E\u043C\u043F\u043E\u043D\u0435\u043D\u0442\u044B, \u0443 \u043A\u043E\u0442\u043E\u0440\u044B\u0445 \u0442\u0435\u043F\u0435\u0440\u044C \u0435\u0441\u0442\u044C \u0441\u043E\u0431\u0441\u0442\u0432\u0435\u043D\u043D\u044B\u0435 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B \u0432 \u0441\u043E\u0432\u0440\u0435\u043C\u0435\u043D\u043D\u044B\u0445 \u0432\u0435\u0440\u0441\u0438\u044F\u0445 .NET (Windows, iOS, Android \u0438 \u0442. \u0434.).",
+      "label": "\u041D\u0435\u043E\u0431\u0445\u043E\u0434\u0438\u043C\u043E \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u0446\u0435\u043B\u0435\u0432\u044B\u0435 \u043F\u043B\u0430\u0442\u0444\u043E\u0440\u043C\u044B \u043F\u0440\u043E\u0435\u043A\u0442\u0430",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "\u041E\u0431\u0437\u043E\u0440 \u043F\u0435\u0440\u0435\u0445\u043E\u0434\u0430 \u0441 .NET Framework \u043D\u0430 .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265227",
+          "isCustom": false
+        },
+        {
+          "title": "\u041F\u0430\u043A\u0435\u0442\u044B SDK \u043F\u0440\u043E\u0435\u043A\u0442\u0430 .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2265226",
+          "isCustom": false
+        }
+      ]
+    },
+    "Api.0002": {
+      "id": "Api.0002",
+      "isFeature": false,
+      "description": "API \u043D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C \u043D\u0430 \u0443\u0440\u043E\u0432\u043D\u0435 \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0430 \u0434\u043B\u044F \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 .NET: \u0434\u043B\u044F \u0443\u0441\u043F\u0435\u0448\u043D\u043E\u0439 \u043A\u043E\u043C\u043F\u0438\u043B\u044F\u0446\u0438\u0438 \u043F\u0440\u0438 \u043D\u0430\u0446\u0435\u043B\u0438\u0432\u0430\u043D\u0438\u0438 \u043D\u0430 \u043D\u043E\u0432\u0443\u044E \u0432\u0435\u0440\u0441\u0438\u044E \u0442\u0440\u0435\u0431\u0443\u0435\u0442\u0441\u044F \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043A\u043E\u0434, \u043D\u0430\u043F\u0440\u0438\u043C\u0435\u0440 \u0443\u0434\u0430\u043B\u0438\u0442\u044C \u0443\u0441\u0442\u0430\u0440\u0435\u0432\u0448\u0438\u0435 API \u0438\u043B\u0438 \u0438\u0437\u043C\u0435\u043D\u0438\u0442\u044C \u043F\u043E\u0434\u043F\u0438\u0441\u0438 \u043C\u0435\u0442\u043E\u0434\u043E\u0432.",
+      "label": "\u041D\u0435\u0441\u043E\u0432\u043C\u0435\u0441\u0442\u0438\u043C\u043E\u0441\u0442\u044C \u0438\u0441\u0442\u043E\u0447\u043D\u0438\u043A\u0430 \u0434\u043B\u044F \u0432\u044B\u0431\u0440\u0430\u043D\u043D\u043E\u0439 \u0432\u0435\u0440\u0441\u0438\u0438 .NET",
+      "severity": "Potential",
+      "effort": 1,
+      "links": [
+        {
+          "title": "\u041A\u0440\u0438\u0442\u0438\u0447\u0435\u0441\u043A\u0438\u0435 \u0438\u0437\u043C\u0435\u043D\u0435\u043D\u0438\u044F \u0432 .NET",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2262679",
+          "isCustom": false
+        }
+      ]
+    },
+    "GdiDrawing": {
+      "id": "GdiDrawing",
+      "isFeature": false,
+      "description": "System.Drawing APIs for 2D graphics, imaging, and printing that are available via NuGet package System.Drawing.Common. Note: Not recommended for server scenarios due to Windows dependencies; consider cross-platform alternatives like SkiaSharp or ImageSharp for new code.",
+      "label": "GDI\u002B / System.Drawing",
+      "severity": "Mandatory",
+      "effort": 1,
+      "links": [
+        {
+          "title": "System.Drawing.Common only supported on Windows",
+          "url": "https://go.microsoft.com/fwlink/?linkid=2341701",
+          "isCustom": false
+        }
+      ]
+    }
+  }
+}
