@@ -18,10 +18,8 @@ namespace NeuralNetwork.Tests
         {
             var converter = new PictureConverter();
 
-            // Получаем путь к папке bin
-            var binPath = AppDomain.CurrentDomain.BaseDirectory;
-            // Поднимаемся на 3 уровня вверх: bin\Release -> bin -> NeuralNetworkTests
-            var projectPath = Path.GetFullPath(Path.Combine(binPath, "..", ".."));
+            var outputPath = AppDomain.CurrentDomain.BaseDirectory;
+            var projectPath = Path.GetFullPath(Path.Combine(outputPath, "..", "..", ".."));
 
             var parasitizedPath = Path.Combine(projectPath, @"Images\Parasitized.png");
             var uninfectedPath = Path.Combine(projectPath, @"Images\Uninfected.png");

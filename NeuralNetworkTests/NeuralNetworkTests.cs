@@ -83,8 +83,9 @@ namespace NeuralNetwork.Tests
             var size = 500;
 
             // Пути к обучающим данным
-            var binPath = AppDomain.CurrentDomain.BaseDirectory;
-            var projectPath = Path.GetFullPath(Path.Combine(binPath, "..", ".."));
+            var outputPath = AppDomain.CurrentDomain.BaseDirectory;
+            var projectPath = Path.GetFullPath(Path.Combine(outputPath, "..", "..", ".."));
+
             var parasitizedPath = Path.Combine(projectPath, @"Images\Parasitized\");
             var uninfectedPath = Path.Combine(projectPath, @"Images\Uninfected\");
             var testParasitizedImagePath = Path.Combine(projectPath, @"Images\Parasitized.png");
